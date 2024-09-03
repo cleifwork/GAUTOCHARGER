@@ -31,7 +31,7 @@
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your **GAUTOCHARGER** folder.
-`credentials.json` (File contains...)
+`credentials.json` (File contains OAuth2.0 Client ID and Client Secret)
 
 ## Installation & Configuration
 
@@ -53,7 +53,7 @@ To run this project, you will need to add the following environment variables to
 > [!NOTE] 
 > Always check "Use admin privilege..." and "Add python.exe to PATH" during installation to avoid errors
   	
--   Download the **[GAUTOCHARGER](https://github.com/cleifwork/GAUTOCHARGER)**
+-   Download **[GAUTOCHARGER](https://github.com/cleifwork/GAUTOCHARGER)**
 -   Click Code > Download Zip
 -   Extract main folder to your Desktop
 -   Rename main folder to **'GAUTOCHARGER'**
