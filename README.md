@@ -98,11 +98,7 @@ To run this project, you will need to add the following environment variables to
 - Add statement here...
 
 ## Screenshots
-
-![App Screenshot](https://drive.google.com/uc?export=view&id=1e4YSlZMKv2KPSJopF8owPT_tNJgetqAF)
-
-[App Screenshot](https://drive.google.com/uc?id=1e4YSlZMKv2KPSJopF8owPT_tNJgetqAF&export=view)
-
+![App Screenshot](https://drive.google.com/uc?export=view&id=18M-28ac02I2GbAQpDuyhXgcNlsGsb8vU)
 
 ## Support
 
