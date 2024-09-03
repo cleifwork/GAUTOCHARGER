@@ -53,10 +53,16 @@ To run this project, you will need to add the following environment variables to
 > [!NOTE] 
 > Always check "Use admin privilege..." and "Add python.exe to PATH" during installation to avoid errors
   	
--   Download **[GAUTOCHARGER](https://github.com/cleifwork/GAUTOCHARGER)**
--   Click Code > Download Zip
--   Extract main folder to your Desktop
--   Rename main folder to **'GAUTOCHARGER'**
+- Download **[GAUTOCHARGER](https://github.com/cleifwork/GAUTOCHARGER)**
+- Click Code > Download Zip
+- Extract main folder to your Desktop
+- Rename main folder to **'GAUTOCHARGER'**
+- Install EvenGhost from here _**'%USERPROFILE%\Desktop\GAUTOCHARGER\config\EG_0.5.0-rc6_Setup'**_ 
+- Launch EventGhost
+	- Click **'Open File'**
+	- Load EventGhost Tree file from here _**'%USERPROFILE%\Desktop\GAUTOCHARGER\config\gautocharger_v2'**_ 
+	- Type **'shell:startup'** in the run window
+	- Paste EventGhost shortcut in the startup window
 
 **2. SHOULD HAVE A GOOGLE ACCOUNT**
 -   Login to to your google account
@@ -74,7 +80,7 @@ To run this project, you will need to add the following environment variables to
 	-   Click **'DOWNLOAD JSON'**
 	-   Rename file to _"credentials"_ before saving to _**'%USERPROFILE%\Desktop\GAUTOCHARGER'**_  
    
-**3. SHOULD HAVE IFTTT ACCOUNT** (Creates the email trigger)
+**3. SHOULD HAVE IFTTT ACCOUNT** (Responds to the email trigger)
 > [!IMPORTANT]
 > SOME REQUIREMENTS: 
 
