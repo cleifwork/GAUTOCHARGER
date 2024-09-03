@@ -69,9 +69,6 @@ To run this project, you will need to add the following environment variables to
 > [!TIP]
 > You may use existing project or create a new project
 -   Goto APIs & Services
-
-**> CREDENTIALS CREATION**
--   **OAuth Client ID:**
     -   Click _"Credentials"_ (with the key icon)
     -   Click **'+CREATE CREDENTIALS'**
 	-   Select **'OAuth client ID'**
