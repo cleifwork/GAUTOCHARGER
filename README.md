@@ -76,7 +76,7 @@ To run this project, you will need to add the following environment variables to
     -   Click **'+CREATE CREDENTIALS'**
 	-   Select **'OAuth client ID'**
     -   Select **'Application type'** in the dropdown list: **'Desktop app'**
-	-   Give it A Name _(OPTIONAL)_
+	-   Give it a Name _(OPTIONAL)_
 	-   Click **'CREATE'**
 	-   Click **'DOWNLOAD JSON'**
 	-   Rename file to _"credentials"_ before saving to _**'%USERPROFILE%\Desktop\GAUTOCHARGER'**_  
@@ -99,9 +99,8 @@ To run this project, you will need to add the following environment variables to
 
 ## Screenshots
 
-![App Screenshot](https://drive.google.com/thumbnail?id=1e4YSlZMKv2KPSJopF8owPT_tNJgetqAF)
+[App Screenshot](https://drive.google.com/uc?id=1e4YSlZMKv2KPSJopF8owPT_tNJgetqAF&export=view)
 
-[Zoom App Screenshot](https://drive.google.com/uc?id=1e4YSlZMKv2KPSJopF8owPT_tNJgetqAF)
 
 ## Support
 
@@ -112,6 +111,6 @@ To run this project, you will need to add the following environment variables to
 [@JDIYMPH](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA)
 ## Tech Stack
 
-**Client:** Python, IFTTT, Tapo
+**Client:** EventGhost/Python Script, Tapo
 
-**Server:** Google API
+**Server:** Google OAuth 2.0 Server, Gmail, IFTTT 
