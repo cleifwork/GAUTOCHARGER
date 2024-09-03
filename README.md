@@ -57,10 +57,10 @@ To run this project, you will need to add the following environment variables to
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
-- Install EvenGhost from here _**'%USERPROFILE%\Desktop\GAUTOCHARGER\config\EG_0.5.0-rc6_Setup'**_ 
+- Install EvenGhost from here _'%USERPROFILE%\Desktop\GAUTOCHARGER\config\EG_0.5.0-rc6_Setup'_ 
 - Launch EventGhost
 	- Click **'Open File'**
-	- Load EventGhost Tree file from here _**'%USERPROFILE%\Desktop\GAUTOCHARGER\config\gautocharger_v2'**_ 
+	- Load EventGhost Tree file from here _'%USERPROFILE%\Desktop\GAUTOCHARGER\config\gautocharger_v2'_ 
 	- Type **'shell:startup'** in the run window
 	- Paste EventGhost shortcut in the startup window
 
