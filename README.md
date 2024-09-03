@@ -78,7 +78,7 @@ To run this project, you will need to add the following environment variables to
 > [!IMPORTANT]
 > SOME REQUIREMENTS: 
 
-**4. SHOULD HAVE TAPO SMARTPLUG** (Cuts/restores the power supply of the power adapter)
+**4. SHOULD HAVE TAPO SMARTPLUG** (Cuts/restores power supply to the laptop's power adapter)
 > [!IMPORTANT]
 > SOME REQUIREMENTS: 
 
