@@ -78,7 +78,11 @@ To run this project, you will need to add the following environment variables to
 > [!IMPORTANT]
 > SOME REQUIREMENTS: 
 
-**4. SHOULD HAVE TAPO ACCOUNT** (Triggers the Tapo Smart Plug)
+**4. SHOULD HAVE TAPO SMARTPLUG** (Cuts/restores the power supply of the power adapter)
+> [!IMPORTANT]
+> SOME REQUIREMENTS: 
+
+**5. SHOULD HAVE TAPO ACCOUNT** (Manages the Tapo SmartPlug)
 > [!IMPORTANT]
 > SOME REQUIREMENTS: 
 
