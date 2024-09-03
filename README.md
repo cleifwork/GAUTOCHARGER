@@ -52,7 +52,7 @@ To run this project, you will need to add the following environment variables to
 > If _"Windows Security Alert"_ window pops
 - Click _"Allow access"_
 						     	
--   Download the **[GAUTOCHARGER](https://github.com/cleifwork/GAUTOCHARGER/tree/GAUTOCHARGER)**
+-   Download the **[GAUTOCHARGER](https://github.com/cleifwork/GAUTOCHARGER)**
 -   Click Code > Download Zip
 -   Extract main folder to your Desktop
 -   Rename main folder to **'GAUTOCHARGER'**
@@ -90,16 +90,7 @@ To run this project, you will need to add the following environment variables to
 	-   Key type: **JSON** 
 	-   CREATE _(file will be downloaded)_
 	-   Rename file to _"service_account"_ (.json)
-	-   Save to _**'%USERPROFILE%\Desktop\GCONNECT'**_
-
--   **API Key Creation:**
-    -   Go back to +CREATE CREDENTIALS
-    -   Select API KEY
-    -   Copy API KEY first
-    -   Click _"Edit API key"_ in the pop-up window
-    -   Select _"Restrict API key"_ under API restrictions
-    -   Check Google Drive API > OK > SAVE
-    -   Paste API KEY to this file _**'put_api_key_here.txt'**_      
+	-   Save to _**'%USERPROFILE%\Desktop\GCONNECT'**_  
    
 **> GAUTOCHARGER INITIALIZATION**  
 
@@ -118,13 +109,8 @@ To run this project, you will need to add the following environment variables to
     -   Sender should receive WiFi Voucher via SMS. 
 
 ## Optimizations
+- Add statement here...
 
-- Refactored the code to eliminate redundancy.
-- Reduced macro size from 229KB to 44KB by restructuring multiple IF/ELSE statements and consolidating similar variables into a single dictionary/array.
-- Optimized file asset usage by automatically extracting the necessary data from the source file.
-- Added Maya payment support
-- Added Logo and WiFi QR Code customization option when printing vouchers
-- Added automated backup for crucial files during initial configuration
 ## Screenshots
 
 ![App Screenshot](https://drive.google.com/thumbnail?id=1e4YSlZMKv2KPSJopF8owPT_tNJgetqAF)
