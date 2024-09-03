@@ -90,12 +90,10 @@ To run this project, you will need to add the following environment variables to
 > SOME REQUIREMENTS: 
 
 ## Running Tests
--   (MD) Click on **'Local Variables'** to verify if the voucher codes have been successfully added to their respective voucher variables.
--   Send amount to the Server Phone's registered e-wallet (Gcash | Maya) number.
-    -   Sender should receive WiFi Voucher via SMS. 
+-   Add testing steps here...
 
 ## Optimizations
-- Add statement here...
+- Add optimization statements here...
 
 ## Screenshots
 ![App Screenshot](https://drive.google.com/uc?export=view&id=18M-28ac02I2GbAQpDuyhXgcNlsGsb8vU)
