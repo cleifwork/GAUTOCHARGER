@@ -37,16 +37,17 @@ To run this project, you will need to add the following environment variables to
 
 **INVOLVED APPS:**
 - EventGhost (included)
-- Python 3.11
+- Python (3.11..)
 - Google 
 - IFTTT 
 - Tapo 
 
 
 ### REQUIREMENTS:
+
 **1. SHOULD HAVE A WINDOWS LAPTOP** 
 > [!NOTE] 
-> Tested in Windows 10 and Windows 11
+> Tested using Windows 10 and Windows 11
 
 - [Install python](https://www.python.org/downloads/) (recommended version: _**python-3.11.4**_)
 > [!NOTE] 
@@ -61,13 +62,9 @@ To run this project, you will need to add the following environment variables to
 -   Extract main folder to your Desktop
 -   Rename main folder to **'GAUTOCHARGER'**
 
-> [!NOTE] 
-> If _"Windows protected..."_ SmartScreen window pops
--   Click _"More info"_ > Run anyway
-
 **2. SHOULD HAVE A GOOGLE ACCOUNT**
 -   Login to to your google account
--   Enable [Google Cloud Console](https://console.cloud.google.com/)
+-   Goto [Google Cloud Console](https://console.cloud.google.com/)
 -   Create a **NEW PROJECT** 
 > [!TIP]
 > You may use existing project or create a new project
@@ -84,9 +81,6 @@ To run this project, you will need to add the following environment variables to
 	-   Click **'DOWNLOAD JSON'**
 	-   Rename file to _"credentials"_ before saving to _**'%USERPROFILE%\Desktop\GAUTOCHARGER'**_  
    
-**> GAUTOCHARGER INITIALIZATION**  
-
-
 **3. SHOULD HAVE IFTTT ACCOUNT** (Creates the email trigger)
 > [!IMPORTANT]
 > SOME REQUIREMENTS: 
