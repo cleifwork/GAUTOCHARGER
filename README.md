@@ -67,34 +67,22 @@ To run this project, you will need to add the following environment variables to
 
 **2. SHOULD HAVE A GOOGLE ACCOUNT**
 -   Login to to your google account
--   Enable [Google Drive API](https://console.cloud.google.com/)
+-   Enable [Google Cloud Console](https://console.cloud.google.com/)
 -   Create a **NEW PROJECT** 
 > [!TIP]
-> You can use your voucher wifi portal as project name
+> You may use existing project or create a new project
 -   Goto APIs & Services
-    -   ENABLE APIS & SERVICES 
-    -   Select Google Drive
-    -   ENABLE
 
-**> CREDENTIALS CONFIGURATION**
--   **Service Account Creation:**
-    -   Goto _"Credentials"_ (with the key icon)
-    -   Click **"+CREATE CREDENTIALS"**
-	-   Select Service Account
-	-   Give it Account Name **(REQUIRED)**
-	-   Give it Account ID **(REQUIRED - _Auto Generated_)**
-	-   Give it Description _(OPTIONAL)_
-	-   CREATE AND CONTINUE
-	-   Give it an **"Owner"** role
-	-   DONE
-    -   Click the newly created Service Account
-	-   Goto **"KEYS"** tab
-	-   Click ADD KEY
-	-   Create new key
-	-   Key type: **JSON** 
-	-   CREATE _(file will be downloaded)_
-	-   Rename file to _"service_account"_ (.json)
-	-   Save to _**'%USERPROFILE%\Desktop\GCONNECT'**_  
+**> CREDENTIALS CREATION**
+-   **OAuth Client ID:**
+    -   Click _"Credentials"_ (with the key icon)
+    -   Click **'+CREATE CREDENTIALS'**
+	-   Select **'OAuth client ID'**
+    -   Select **'Application type'** in the dropdown list: **'Desktop app'**
+	-   Give it A Name _(OPTIONAL)_
+	-   Click **'CREATE'**
+	-   Click **'DOWNLOAD JSON'**
+	-   Rename file to _"credentials"_ before saving to _**'%USERPROFILE%\Desktop\GAUTOCHARGER'**_  
    
 **> GAUTOCHARGER INITIALIZATION**  
 
