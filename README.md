@@ -52,11 +52,7 @@ To run this project, you will need to add the following environment variables to
 - [Install python](https://www.python.org/downloads/) (recommended version: _**python-3.11.4**_)
 > [!NOTE] 
 > Always check "Use admin privilege..." and "Add python.exe to PATH" during installation to avoid errors
-
-> [!NOTE] 
-> If _"Windows Security Alert"_ window pops
-- Click _"Allow access"_
-						     	
+  	
 -   Download the **[GAUTOCHARGER](https://github.com/cleifwork/GAUTOCHARGER)**
 -   Click Code > Download Zip
 -   Extract main folder to your Desktop
@@ -97,7 +93,7 @@ To run this project, you will need to add the following environment variables to
 
 ## Support
 
-#### For support, join our FB Group
+#### Join our FB Group
 [GConnect App (Omada Voucher Solution)](https://www.facebook.com/groups/1776872022780742) 
   
 #### Or subcribe to our YouTube Channel
