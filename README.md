@@ -1,4 +1,8 @@
 
+> [!IMPORTANT]
+> **DO NOT USE JUST YET - STILL UNDER DEVELOPMENT** 
+
+
 # GAUTOCHARGER: Automation Solution
 
 **GAUTOCHARGER** is an automation solution designed for laptops running Windows OS that are used as servers and are connected to a charger 24/7. This solution helps manage the laptop's battery health by automatically disconnecting the power when charging is unnecessary. The process works by sending an email trigger to IFTTT from an EventGhost script, which then uses Tapo Smart Plugs (e.g., P100, P103, etc.) to control the power supply. This ensures that your server laptop remains charged without the risk of overcharging.
