@@ -3,9 +3,9 @@
 > **DO NOT USE JUST YET - STILL UNDER DEVELOPMENT** 
 
 
-# GAUTOCHARGER: Automation Solution
+# GAUTOCHARGER: AutoCharging Solution
 
-**GAUTOCHARGER** is an automation solution designed for laptops running Windows OS that are used as servers and are connected to a charger 24/7. This solution helps manage the laptop's battery health by automatically disconnecting the power when charging is unnecessary. The process works by sending an email trigger to IFTTT from an EventGhost script, which then uses Tapo Smart Plugs (e.g., P100, P103, etc.) to control the power supply. This ensures that your server laptop remains charged without the risk of overcharging.
+**GAUTOCHARGER** is an automation solution designed for laptops running Windows OS that are used as servers and are connected to a charger 24/7. This solution helps manage the laptop's battery health by automatically disconnecting the power when charging is unnecessary. The process works by sending an email trigger to IFTTT from an EventGhost script, which then uses Tapo Smart Plugs (e.g., P100, P105, etc.) to control the power supply. This ensures that your server laptop remains charged without the risk of overcharging.
 
 ## **Requirements**
 - **EventGhost:** To run the automation script.
@@ -57,7 +57,7 @@ To run this project, you will need to add the following environment variables to
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
-- Install EvenGhost from here _'%USERPROFILE%\Desktop\GAUTOCHARGER\config\EG_0.5.0-rc6_Setup'_ 
+- Install EventGhost from here _'%USERPROFILE%\Desktop\GAUTOCHARGER\config\EG_0.5.0-rc6_Setup'_ 
 - Launch EventGhost
 	- Click **'Open File'**
 	- Load EventGhost Tree file from here _'%USERPROFILE%\Desktop\GAUTOCHARGER\config\gautocharger_v2'_ 
@@ -81,8 +81,29 @@ To run this project, you will need to add the following environment variables to
 	-   Rename file to _"credentials"_ before saving to _**'%USERPROFILE%\Desktop\GAUTOCHARGER'**_  
    
 **3. SHOULD HAVE IFTTT ACCOUNT** (Responds to the email trigger)
-> [!IMPORTANT]
-> SOME REQUIREMENTS: 
+> Signing Up for IFTTT Using Google Account on a Web Browser:
+- Visit the [IFTTT Website](https://ifttt.com/explore)
+- Open your web browser and go to IFTTT's official website.
+
+> Start the Sign-Up Process:
+- Click on the "Sign up" button, usually located at the top right corner of the page.
+
+> Sign Up with Google:
+- Choose the "Continue with Google" option on the sign-up page.
+
+> Log in to Your Google Account:
+- A Google sign-in window will appear.
+- Select the Google account you want to use. 
+- If you're not logged in, enter your Google email and password, then click "Next."
+
+> Grant Permissions:
+- Review the permissions that IFTTT is requesting, then click "Allow" to grant access.
+
+> Complete the Sign-Up:
+- You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup.
+- Done!
+
+-You're now signed up for IFTTT and can start creating applets.
 
 **4. SHOULD HAVE TAPO SMARTPLUG** (Cuts/restores power supply to the laptop's power adapter)
 > [!IMPORTANT]
