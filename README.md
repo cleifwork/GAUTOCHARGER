@@ -82,26 +82,26 @@ To run this project, you will need to add the following environment variables to
    
 **3. SHOULD HAVE IFTTT ACCOUNT** (Responds to the email trigger)
 - **Signing Up for IFTTT Using Google Account on a Web Browser:**
-	- Visit the [IFTTT Website](https://ifttt.com/explore)
-	- Open your web browser and go to IFTTT's official website.
+	- _Visit the [IFTTT Website](https://ifttt.com/explore)_
+	- _Open your web browser and go to IFTTT's official website._
 
 - **Start the Sign-Up Process:**
-	- Click on the "Sign up" button, usually located at the top right corner of the page.
+	- _Click on the "Sign up" button, usually located at the top right corner of the page._
 
 - **Sign Up with Google:**
-	- Choose the "Continue with Google" option on the sign-up page.
+	- _Choose the "Continue with Google" option on the sign-up page._
 
 - **Log in to Your Google Account:**
-	- A Google sign-in window will appear.
-	- Select the Google account you want to use. 
-	- If you're not logged in, enter your Google email and password, then click "Next."
+	- _A Google sign-in window will appear._
+	- _Select the Google account you want to use._ 
+	- _If you're not logged in, enter your Google email and password, then click "Next."_
 
 - **Grant Permissions:**
-	- Review the permissions that IFTTT is requesting, then click "Allow" to grant access.
+	- _Review the permissions that IFTTT is requesting, then click "Allow" to grant access._
 
 - **Complete the Sign-Up:**
-	- You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup.
-	- Done! You're now signed up for IFTTT and can start creating applets.
+	- _You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup._
+	- _Done! You're now signed up for IFTTT and can start creating applets._
 
 **4. SHOULD HAVE TAPO SMARTPLUG** (Cuts/restores power supply to the laptop's power adapter)
 > [!IMPORTANT]
