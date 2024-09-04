@@ -86,10 +86,10 @@ To run this project, you will need to add the following environment variables to
 	- _Open your web browser and go to IFTTT's official website._
 
 - **Start the Sign-Up Process:**
-	- _Click on the "Sign up" button, usually located at the top right corner of the page._
+	- _Click on the **"Sign up"** button, usually located at the top right corner of the page._
 
 - **Sign Up with Google:**
-	- _Choose the "Continue with Google" option on the sign-up page._
+	- _Choose the **"Continue with Google"** option on the sign-up page._
 
 - **Log in to Your Google Account:**
 	- _A Google sign-in window will appear._
@@ -97,7 +97,7 @@ To run this project, you will need to add the following environment variables to
 	- _If you're not logged in, enter your Google email and password, then click "Next."_
 
 - **Grant Permissions:**
-	- _Review the permissions that IFTTT is requesting, then click "Allow" to grant access._
+	- _Review the permissions that IFTTT is requesting, then click **"Allow"** to grant access._
 
 - **Complete the Sign-Up:**
 	- _You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup._
@@ -147,7 +147,7 @@ To run this project, you will need to add the following environment variables to
 **Step 4: Set Up the Tapo Smart Plug in the App**
 - Add a New Device:
 	- _After logging in, tap the "+" (plus) icon in the app to add a new device._
-	- _Select "Smart Plug" from the list of devices._
+	- _Select **"Smart Plug"** from the list of devices._
 
 - Connect to Wi-Fi:
 	- _Follow the on-screen instructions to connect your smartphone to the Tapo Smart Plug's temporary Wi-Fi network (SSID)._
