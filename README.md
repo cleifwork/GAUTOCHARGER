@@ -103,7 +103,7 @@ To run this project, you will need to add the following environment variables to
 	- _You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup._
 	- _Done! You're now signed up for IFTTT and can start creating applets._
 
-### 4. SHOULD HAVE TAPO SMARTPLUG & TAPO ACCOUNT _(Cuts/restores power supply to the laptop's power adapter)_
+### 4. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG _(Cuts/restores power supply to the laptop's power adapter)_
 > Setting Up Your Tapo Smart Plug and Creating a Tapo Account
 
 **Step 1: Unbox and Prepare Your Tapo Smart Plug**
