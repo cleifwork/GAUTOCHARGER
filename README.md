@@ -108,63 +108,63 @@ To run this project, you will need to add the following environment variables to
 
 **Step 1: Unbox and Prepare Your Tapo Smart Plug**
 - Unbox the Smart Plug:
-	- Remove the Tapo Smart Plug from its packaging.
-	- Ensure you have the plug and any included documentation.
+	- _Remove the Tapo Smart Plug from its packaging._
+	- _Ensure you have the plug and any included documentation._
 
 - Choose a Location:
-	- Find a power outlet where you want to use the Tapo Smart Plug.
-	- Ensure the location has a stable Wi-Fi signal, as the plug will connect to your home network.
+	- _Find a power outlet where you want to use the Tapo Smart Plug._
+	- _Ensure the location has a stable Wi-Fi signal, as the plug will connect to your home network._
 
 - Plug It In:
-	- Insert the Tapo Smart Plug into the chosen power outlet.
-	- The LED indicator on the plug should start blinking orange and green, indicating it’s ready to be set up.
+	- _Insert the Tapo Smart Plug into the chosen power outlet._
+	- _The LED indicator on the plug should start blinking orange and green, indicating it’s ready to be set up._
 
 **Step 2: Download and Install the Tapo App**
 - Download the Tapo App:
-	- On your smartphone, open the App Store (iOS) or Google Play Store (Android).
-	- Search for "Tapo" and download the official app developed by TP-Link.
+	- _On your smartphone, open the App Store (iOS) or Google Play Store (Android)._
+	- _Search for **"Tapo"** and download the official app developed by TP-Link._
 
 - Install the App:
-	- Once downloaded, install the app on your smartphone.
+	- _Once downloaded, install the app on your smartphone._
 
 **Step 3: Create a Tapo Account**
 - Open the Tapo App:
-	- Launch the Tapo app on your smartphone.
+	- _Launch the Tapo app on your smartphone._
 
 - Sign Up for a Tapo Account:
-	- On the welcome screen, tap "Sign Up."
-	- Enter your email address and create a password.
-	- Agree to the terms of service and privacy policy.
-	- Tap "Sign Up."
+	- _On the welcome screen, tap **"Sign Up."**_
+	- _Enter your email address and create a password._
+	- _Agree to the terms of service and privacy policy._
+	- _Tap **"Sign Up."**_
 
 - Verify Your Email Address:
-	- Check your email for a verification message from Tapo.
-	- Click the verification link in the email to confirm your account.
+	- _Check your email for a verification message from Tapo._
+	- _Click the verification link in the email to confirm your account._
 
 - Log In to Your Tapo Account:
-	- Return to the Tapo app and log in using your newly created account credentials.
+	- _Return to the Tapo app and log in using your newly created account credentials._
 
 **Step 4: Set Up the Tapo Smart Plug in the App**
 - Add a New Device:
-	- After logging in, tap the "+" (plus) icon in the app to add a new device.
-	- Select "Smart Plug" from the list of devices.
+	- _After logging in, tap the "+" (plus) icon in the app to add a new device._
+	- _Select "Smart Plug" from the list of devices._
 
 - Connect to Wi-Fi:
-	- Follow the on-screen instructions to connect your smartphone to the Tapo Smart Plug's temporary Wi-Fi network (SSID).
-	- Once connected, return to the Tapo app.
+	- _Follow the on-screen instructions to connect your smartphone to the Tapo Smart Plug's temporary Wi-Fi network (SSID)._
+	- _Once connected, return to the Tapo app._
 
 - Configure Wi-Fi Settings:
-	- The app will prompt you to select your home Wi-Fi network.
-	- Choose your Wi-Fi network, enter the password, and tap "Next."
-	- The Tapo Smart Plug will connect to your home network.
+	- _The app will prompt you to select your home Wi-Fi network._
+	- _Choose your Wi-Fi network, enter the password, and tap **"Next."**_
+	- _The Tapo Smart Plug will connect to your home network._
 
 - Name Your Smart Plug:
-	- Give your Smart Plug a name (e.g., "GAUTOCHARGER").
-	- Assign it to a room if you wish.
+	- _Give your Smart Plug a name (e.g., **"GAUTOCHARGER"**)._
+	- _Assign it to a room if you wish._
 
 - Complete the Setup:
-	- Once the setup is complete, the LED indicator on the Smart Plug will turn solid green, indicating a successful connection.
-	- You can now control the plug via the Tapo app.
+	- _Once the setup is complete, the LED indicator on the Smart Plug will turn solid green, indicating a successful connection._
+	- _You can now control the plug via the Tapo app._
 
 
 ## Running Tests
