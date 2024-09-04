@@ -81,29 +81,27 @@ To run this project, you will need to add the following environment variables to
 	-   Rename file to _"credentials"_ before saving to _**'%USERPROFILE%\Desktop\GAUTOCHARGER'**_  
    
 **3. SHOULD HAVE IFTTT ACCOUNT** (Responds to the email trigger)
-> Signing Up for IFTTT Using Google Account on a Web Browser:
-- Visit the [IFTTT Website](https://ifttt.com/explore)
-- Open your web browser and go to IFTTT's official website.
+- **Signing Up for IFTTT Using Google Account on a Web Browser:**
+	- Visit the [IFTTT Website](https://ifttt.com/explore)
+	- Open your web browser and go to IFTTT's official website.
 
-> Start the Sign-Up Process:
-- Click on the "Sign up" button, usually located at the top right corner of the page.
+- **Start the Sign-Up Process:**
+	- Click on the "Sign up" button, usually located at the top right corner of the page.
 
-> Sign Up with Google:
-- Choose the "Continue with Google" option on the sign-up page.
+- **Sign Up with Google:**
+	- Choose the "Continue with Google" option on the sign-up page.
 
-> Log in to Your Google Account:
-- A Google sign-in window will appear.
-- Select the Google account you want to use. 
-- If you're not logged in, enter your Google email and password, then click "Next."
+- **Log in to Your Google Account:**
+	- A Google sign-in window will appear.
+	- Select the Google account you want to use. 
+	- If you're not logged in, enter your Google email and password, then click "Next."
 
-> Grant Permissions:
-- Review the permissions that IFTTT is requesting, then click "Allow" to grant access.
+- **Grant Permissions:**
+	- Review the permissions that IFTTT is requesting, then click "Allow" to grant access.
 
-> Complete the Sign-Up:
-- You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup.
-- Done!
-
--You're now signed up for IFTTT and can start creating applets.
+- **Complete the Sign-Up:**
+	- You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup.
+	- Done! You're now signed up for IFTTT and can start creating applets.
 
 **4. SHOULD HAVE TAPO SMARTPLUG** (Cuts/restores power supply to the laptop's power adapter)
 > [!IMPORTANT]
