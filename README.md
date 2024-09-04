@@ -43,9 +43,9 @@ To run this project, you will need to add the following environment variables to
 - Tapo 
 
 
-### REQUIREMENTS:
+## REQUIREMENTS:
 
-**1. SHOULD HAVE A WINDOWS LAPTOP** 
+### 1. SHOULD HAVE A WINDOWS LAPTOP
 > [!NOTE] 
 > Tested using Windows 10 and Windows 11
 
@@ -64,7 +64,7 @@ To run this project, you will need to add the following environment variables to
 	- Type **'shell:startup'** in the run window
 	- Paste EventGhost shortcut in the startup window
 
-**2. SHOULD HAVE A GOOGLE ACCOUNT**
+### 2. SHOULD HAVE A GOOGLE ACCOUNT
 -   Login to to your google account
 -   Goto [Google Cloud Console](https://console.cloud.google.com/)
 -   Create a **NEW PROJECT** 
@@ -80,7 +80,7 @@ To run this project, you will need to add the following environment variables to
 	-   Click **'DOWNLOAD JSON'**
 	-   Rename file to _"credentials"_ before saving to _**'%USERPROFILE%\Desktop\GAUTOCHARGER'**_  
    
-**3. SHOULD HAVE IFTTT ACCOUNT** (Responds to the email trigger)
+### 3. SHOULD HAVE IFTTT ACCOUNT _(Responds to the email trigger)_
 - **Signing Up for IFTTT Using Google Account on a Web Browser:**
 	- _Visit the [IFTTT Website](https://ifttt.com/explore)_
 	- _Open your web browser and go to IFTTT's official website._
@@ -103,7 +103,7 @@ To run this project, you will need to add the following environment variables to
 	- _You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup._
 	- _Done! You're now signed up for IFTTT and can start creating applets._
 
-**4. SHOULD HAVE TAPO SMARTPLUG & TAPO ACCOUNT** (Cuts/restores power supply to the laptop's power adapter)
+### 4. SHOULD HAVE TAPO SMARTPLUG & TAPO ACCOUNT _(Cuts/restores power supply to the laptop's power adapter)_
 > Setting Up Your Tapo Smart Plug and Creating a Tapo Account
 
 **Step 1: Unbox and Prepare Your Tapo Smart Plug**
