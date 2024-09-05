@@ -65,20 +65,19 @@ To run this project, you will need to add the following environment variables to
 	- Paste EventGhost shortcut in the startup window
 
 ### 2. SHOULD HAVE A GOOGLE ACCOUNT
-## Step 1: Create a New Project in **[Google Cloud Console](https://console.cloud.google.com/)**
-1. Go to the Google Cloud Console.
+## Step 1: Create a New Project in Google Cloud Console (You may use existing project)
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
 2. In the top left corner, click the project selector dropdown (next to “Google Cloud”).
 3. Click New Project.
-4. Enter a Project Name (e.g., "OAuth Desktop App Project").
-5. Choose your Billing Account (if required).
-6. Click Create.
+4. Enter a Project Name (e.g., "Desktop App Project").
+5. Click Create.
 
 ## Step 2: Enable the Required APIs
 1. After creating the project, go to the API & Services dashboard:
 2. From the menu (≡), go to APIs & Services > Library.
 3. Search for the Google APIs you need. For example:
-4. Gmail API (if you're sending emails).
-5. Click Enable for the APIs you want to use.
+	- Gmail API (if you're sending emails).
+4. Click Enable for the APIs you want to use.
 
 ## Step 3: Set up the OAuth Consent Screen
 1. Go to APIs & Services > OAuth consent screen.
