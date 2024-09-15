@@ -3,15 +3,11 @@
 > **DO NOT USE JUST YET - STILL UNDER DEVELOPMENT** 
 
 
-# GAUTOCHARGER: AutoCharging Solution
+# GAUTOCHARGER-V2: AutoCharging Solution
 
 **GAUTOCHARGER** is an automation solution designed for laptops running Windows OS that are used as servers and are connected to a charger 24/7. This solution helps manage the laptop's battery health by automatically disconnecting the power when charging is unnecessary. The process works by sending an email trigger to IFTTT from an EventGhost script, which then uses Tapo Smart Plugs (e.g., P100, P105, etc.) to control the power supply. This ensures that your server laptop remains charged without the risk of overcharging.
 
 ## **Requirements**
-- **EventGhost:** To run the automation script.
-- **IFTTT Account:** To receive email triggers and automate power control.
-- **Tapo Smart Plug:** Compatible models include P100, P103, etc.
-- **Tapo Account:** Required to manage your Tapo Smart Plugs.
 - **Python 3.11:** The script requires Python to execute the automation logic.
 
 ## **How It Works**
@@ -36,10 +32,7 @@ To run this project, you will need to add the following environment variables to
 ## Installation & Configuration
 
 **INVOLVED APPS:**
-- EventGhost (included)
 - Python (3.11..)
-- Google 
-- IFTTT 
 - Tapo 
 
 
@@ -53,7 +46,7 @@ To run this project, you will need to add the following environment variables to
 > [!NOTE] 
 > Always check "Use admin privilege..." and "Add python.exe to PATH" during installation to avoid errors
   	
-- Download **[GAUTOCHARGER](https://github.com/cleifwork/GAUTOCHARGER)**
+- Download **[GAUTOCHARGER-V2](https://github.com/cleifwork/GAUTOCHARGER)**
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
@@ -64,69 +57,7 @@ To run this project, you will need to add the following environment variables to
 	- Type **'shell:startup'** in the run window
 	- Paste EventGhost shortcut in the startup window
 
-### 2. SHOULD HAVE A GOOGLE ACCOUNT
-## Step 1: Create a New Project in Google Cloud Console (You may use existing project)
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
-2. In the top left corner, click the project selector dropdown (next to “Google Cloud”).
-3. Click New Project.
-4. Enter a Project Name (e.g., "Desktop App Project").
-5. Click Create.
-
-## Step 2: Enable the Required APIs
-1. After creating the project, go to the API & Services dashboard:
-2. From the menu (≡), go to APIs & Services > Library.
-3. Search for the Google APIs you need. For example:
-	- Gmail API (if you're sending emails).
-4. Click Enable for the APIs you want to use.
-
-## Step 3: Set up the OAuth Consent Screen
-1. Go to APIs & Services > OAuth consent screen.
-2. Choose External (since this is for an app used outside your organization).
-3. Click Create.
-4. Fill in the following details:
-	- App Name: Choose a name for your app (e.g., "My Desktop App").
-	- User Support Email: Provide your email address.
-	- Developer Contact Information: Provide your email address.
-5. Click Save and Continue.
-
-## Step 4: Create OAuth 2.0 Client ID
-1. Go to APIs & Services > Credentials.
-2. Click on + Create Credentials at the top.
-3. Select OAuth 2.0 Client ID.
-4. For Application Type, select Desktop app.
-5. Enter a name for the Desktop Client (e.g., "My Desktop OAuth").
-6. Click Create.
-
-## Step 5: Download Client Secret
-1. After creating the OAuth client, you’ll see the Client ID and Client Secret.
-2. Click Download to save the credentials as a **_"credentials.json"_** file in **_'%USERPROFILE%\Desktop\GAUTOCHARGER'_**  
-3. Click OK to finish.
-
-   
-### 3. SHOULD HAVE IFTTT ACCOUNT _(Responds to the email trigger)_
-- **Signing Up for IFTTT Using Google Account on a Web Browser:**
-	- _Visit the [IFTTT Website](https://ifttt.com/explore)_
-	- _Open your web browser and go to IFTTT's official website._
-
-- **Start the Sign-Up Process:**
-	- _Click on the **"Sign up"** button, usually located at the top right corner of the page._
-
-- **Sign Up with Google:**
-	- _Choose the **"Continue with Google"** option on the sign-up page._
-
-- **Log in to Your Google Account:**
-	- _A Google sign-in window will appear._
-	- _Select the Google account you want to use._ 
-	- _If you're not logged in, enter your Google email and password, then click "Next."_
-
-- **Grant Permissions:**
-	- _Review the permissions that IFTTT is requesting, then click **"Allow"** to grant access._
-
-- **Complete the Sign-Up:**
-	- _You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup._
-	- _Done! You're now signed up for IFTTT and can start creating applets._
-
-### 4. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG _(Cuts/restores power supply to the laptop's power adapter)_
+### 2. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG _(Cuts/restores power supply to the laptop's power adapter)_
 > Setting Up Your Tapo Smart Plug and Creating a Tapo Account
 
 **Step 1: Unbox and Prepare Your Tapo Smart Plug**
@@ -208,6 +139,6 @@ To run this project, you will need to add the following environment variables to
 [@JDIYMPH](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA)
 ## Tech Stack
 
-**Client:** EventGhost/Python Script, Tapo
+**Client:** Python Script, Tapo
 
-**Server:** Google OAuth 2.0 Server, Gmail, IFTTT 
+**Server:** TapoAPI
