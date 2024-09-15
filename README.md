@@ -8,9 +8,9 @@
 **GAUTOCHARGER** is an automation solution designed for laptops running Windows OS that are used as servers and are connected to a charger 24/7. This solution helps manage the laptop's battery health by automatically disconnecting the power when charging is unnecessary. The process works by sending an email trigger to IFTTT from an EventGhost script, which then uses Tapo Smart Plugs (e.g., P100, P105, etc.) to control the power supply. This ensures that your server laptop remains charged without the risk of overcharging.
 
 ## **Requirements**
-- **EventGhost:** To run the automation script.
+- **EventGhost:** To trigger the automation script. Runs in the background.
 - **IFTTT Account:** To receive email triggers and automate power control.
-- **Tapo Smart Plug:** Compatible models include P100, P103, etc.
+- **Tapo Smart Plug:** Compatible models include P100, P105, etc.
 - **Tapo Account:** Required to manage your Tapo Smart Plugs.
 - **Python 3.11:** The script requires Python to execute the automation logic.
 
