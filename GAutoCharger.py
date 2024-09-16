@@ -36,7 +36,7 @@ class CustomTimedRotatingFileHandler(TimedRotatingFileHandler):
 
 # Create the handler
 handler = CustomTimedRotatingFileHandler(log_file_path, when="midnight", interval=1, backupCount=7)
-handler.suffix = "%Y%m%d%H%M%S"
+handler.suffix = "%Y%m%d"
 formatter = logging.Formatter('%(asctime)s - %(message)s')
 handler.setFormatter(formatter)
 
