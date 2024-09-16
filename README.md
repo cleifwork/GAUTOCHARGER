@@ -130,10 +130,10 @@
 - **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 5 minutes. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
 ## Logging
-- GAutoCharger-V2 logs battery levels and plug actions to a rotating log file located in the /logs/ directory. Logs are rotated daily, with each log file named script_log_YYYYMMDDHHMMSS.txt. Old logs are automatically cleaned up after 7 days.
+GAutoCharger-V2 logs battery levels and plug actions to a rotating log file located in the /logs/ directory. Logs are rotated daily, with each log file named script_log_YYYYMMDDHHMMSS.txt. Old logs are automatically cleaned up after 7 days.
 
 ## Retry Machanism
-- The script has a built-in retry mechanism for temporary connection issues with the Tapo Smart Plug. If the plug state fails to fetch or control actions are unsuccessful due to network issues, the script retries the action at the next check interval.
+The script has a built-in retry mechanism for temporary connection issues with the Tapo Smart Plug. If the plug state fails to fetch or control actions are unsuccessful due to network issues, the script retries the action at the next check interval.
 
 ## How It Works
 1. **Battery Monitoring**: The script uses the psutil library to monitor the laptop's battery percentage and charging status.
@@ -146,10 +146,10 @@
 - More robust retry logic with exponential backoff for handling network failures.
 
 ## License
-- This project is licensed under the MIT License.
+This project is licensed under the MIT License.
 
 ## Running Tests
--   Add testing steps here...
+- Add testing steps here...
 
 ## Optimizations
 - Add optimization statements here...
