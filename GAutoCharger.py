@@ -1,10 +1,10 @@
 import os
-import psutil
 import time
+import psutil
 import logging
-from logging.handlers import TimedRotatingFileHandler
 import asyncio
 from tapo import ApiClient
+from logging.handlers import TimedRotatingFileHandler
 
 # Function to read credentials from the text file
 def read_credentials(file_path):
@@ -23,20 +23,9 @@ if not os.path.exists("logs"):
 # Directory where logs will be saved
 log_file_path = "logs/script_log.txt"
 
-# Create custom log handler with rotation
-class CustomTimedRotatingFileHandler(TimedRotatingFileHandler):
-    def _rotate_filename(self):
-        """Override the default filename generation to achieve desired format."""
-        current_time_str = self.rotation_filename(self.baseFilename) + "." + self.suffix
-        new_filename = os.path.join(
-            os.path.dirname(self.baseFilename),  # keep in the same directory
-            f"script_log_{self.suffix}.txt"      # apply the custom format
-        )
-        return new_filename
-
-# Create the handler
-handler = CustomTimedRotatingFileHandler(log_file_path, when="midnight", interval=1, backupCount=7)
-handler.suffix = "%Y%m%d"
+# Create a TimedRotatingFileHandler
+handler = TimedRotatingFileHandler(log_file_path, when="midnight", interval=1, backupCount=7)
+handler.suffix = "%Y%m%d"  # The format for the rotated filenames
 formatter = logging.Formatter('%(asctime)s - %(message)s')
 handler.setFormatter(formatter)
 
@@ -149,7 +138,7 @@ async def main():
     while True:
         current_time = time.time()
         
-        # Check battery and control plug every 2 minutes (120 seconds)
+        # Check battery and control plug every 5 minutes (300 seconds)
         if current_time - last_check_time >= 300:
             await check_battery_and_control_plug()
             last_check_time = current_time
