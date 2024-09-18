@@ -34,7 +34,7 @@ logging.getLogger().addHandler(handler)
 logging.getLogger().setLevel(logging.DEBUG)
 
 # Read credentials from the text file
-creds = read_credentials("tapo_creds.txt")
+creds = read_credentials("tapo_creds.config")
 
 # Ensure credentials are available
 tapo_username = creds.get("username")
@@ -94,8 +94,8 @@ async def control_plug(action, retries=3, delay=2):
                 log_to_file("Tapo P100 turned on (Battery low)")
             elif action == "off" and current_state:
                 await device.off()
-                print_to_console("Tapo P100 turned off (Battery full)")
-                log_to_file("Tapo P100 turned off (Battery full)")
+                print_to_console("Tapo P100 turned off (Battery good)")
+                log_to_file("Tapo P100 turned off (Battery good)")
             return  # Exit the function on success
         except Exception as e:
             attempt += 1
