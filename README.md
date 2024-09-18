@@ -26,15 +26,14 @@
 
 
 ## Demo
-
--   [GConnect App Demo](https://www.youtube.com/)
--   [GConnect Installation & Configuration](https://www.youtube.com/)
+- [GConnect App Demo](https://www.youtube.com/)
+- [GConnect Installation & Configuration](https://www.youtube.com/)
 
 ## Authors
 - [@cleifwork](https://www.github.com/cleifwork)
-## Environment Variables
 
-- To run this project, you will need to add the following environment variables to your **GAUTOCHARGER** folder.
+## Environment Variables
+To run this project, you will need to add the following environment variables to your **GAUTOCHARGER** folder.
 `credentials.json` (File contains OAuth2.0 Client ID and Client Secret)
 
 ## Installation
@@ -62,7 +61,7 @@
 	- Type **'shell:startup'** in the run window
 	- Paste EventGhost shortcut in the startup window
 
-### 2. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG _(Cuts/restores power supply to the laptop's power adapter)_
+### 2. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG
 > Setting Up Your Tapo Smart Plug and Creating a Tapo Account
 
 **Step 1: Unbox and Prepare Your Tapo Smart Plug**
