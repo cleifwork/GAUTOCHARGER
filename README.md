@@ -96,7 +96,7 @@ This project is licensed under the MIT License.
 - Add optimization statements here...
 
 ## Screenshots
-![App Screenshot](https://drive.google.com/uc?export=view&id=18M-28ac02I2GbAQpDuyhXgcNlsGsb8vU)
+![App Screenshot](https://drive.google.com/uc?export=view&id=1Vro6VWORnAFdjA1cgl-9VerqrLVbPYu7)
 
 ## Support
 
