@@ -53,7 +53,8 @@ def log_to_file(message):
 
 def log_error(message):
     logging.error(message)
-    
+
+# Modify get_plug_state to log the device info and not print it to the console
 async def get_plug_state(retries=3, delay=2):
     attempt = 0
     while attempt < retries:
@@ -62,8 +63,8 @@ async def get_plug_state(retries=3, delay=2):
             device = await client.p100(ip_address)
             device_info = await device.get_device_info()
 
-            # Print the device_info to understand its structure
-            print("Device Info:", device_info)
+            # Log the device info instead of printing it to the console
+            log_to_file(f"Device Info: {device_info}")
 
             # Return the actual state from device_info
             return device_info.device_on  # Adjust according to actual device_info structure
@@ -75,7 +76,7 @@ async def get_plug_state(retries=3, delay=2):
                 await asyncio.sleep(delay)
             else:
                 raise  # Raise the exception if all retries fail
-    
+
 # Retry mechanism for the plug control
 async def control_plug(action, retries=3, delay=2):
     attempt = 0
@@ -104,7 +105,7 @@ async def control_plug(action, retries=3, delay=2):
                 print_to_console(f"Retrying in {delay} seconds...")
                 await asyncio.sleep(delay)
             else:
-                raise  # Raise the exception if all retries fail    
+                raise  # Raise the exception if all retries fail
 
 # Function to check the battery and decide on Tapo plug action
 async def check_battery_and_control_plug():
@@ -119,7 +120,7 @@ async def check_battery_and_control_plug():
             log_to_file(log_message)  # Log to file
 
             # Control the plug based on battery level
-            if percent <= 15 and not plugged:
+            if percent <= 20 and not plugged:
                 await control_plug("on")  # Turn on the plug
             elif percent >= 90 and plugged:
                 await control_plug("off")  # Turn off the plug
@@ -137,7 +138,7 @@ async def main():
 
     while True:
         current_time = time.time()
-        
+
         # Check battery and control plug every 5 minutes (300 seconds)
         if current_time - last_check_time >= 300:
             await check_battery_and_control_plug()
