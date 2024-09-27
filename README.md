@@ -15,15 +15,12 @@
 - Configurable Parameters: Easy-to-set thresholds and other parameters in the ```tapo_creds.txt``` file for quick configuration.
 
 ## Requirements
-- Python 3.8+
-- Tapo Smart Plug (P100, P105, etc.)
-- Tapo account with username and password
-- psutil: For battery and power status monitoring
-- Tapo Python API: For controlling the Tapo Smart Plug
-- asyncio: For handling asynchronous operations
-- logging: For logging battery status and error messages
-- Windows OS (for battery monitoring)
-
+- Python 3.11+
+- Tapo Smart Plug (P100, P105)
+- Tapo Account
+- Tapo Credentials (username, password, smartplug static IP)
+- **[Unofficial Tapo API](https://github.com/mihai-dinculescu/tapo)**: For controlling the Tapo Smart Plug
+- Python libraries (```tapo```, ```psutil```)
 
 ## Demo
 - [GConnect App Demo](https://www.youtube.com/)
@@ -37,11 +34,6 @@ To run this project, you will need to add the following environment variables to
 `credentials.json` (File contains OAuth2.0 Client ID and Client Secret)
 
 ## Installation
-
-**INVOLVED APPS:**
-- Python (3.11..)
-- **[Unofficial Tapo API](https://github.com/mihai-dinculescu/tapo)**
-
 
 ### 1. SHOULD HAVE A WINDOWS LAPTOP
 > [!NOTE] 
