@@ -20,7 +20,7 @@
 - Tapo Account
 - Tapo Credentials (username, password, smartplug static IP)
 - **[Unofficial Tapo API](https://github.com/mihai-dinculescu/tapo)**: For controlling the Tapo Smart Plug
-- Python libraries (```tapo```, ```psutil```)
+- Python Libraries (```tapo```, ```psutil```)
 
 ## Demo
 - [GConnect App Demo](https://www.youtube.com/)
