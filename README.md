@@ -53,12 +53,6 @@ pip install tapo psutil
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
-- Install EventGhost from here _'%USERPROFILE%\Desktop\GAUTOCHARGER\config\EG_0.5.0-rc6_Setup'_ 
-- Launch EventGhost
-	- Click **'Open File'**
-	- Load EventGhost Tree file from here _'%USERPROFILE%\Desktop\GAUTOCHARGER\config\gautocharger_v2'_ 
-	- Type **'shell:startup'** in the run window
-	- Paste EventGhost shortcut in the startup window
 
 ### 2. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG
 > Creating a Tapo Account and Setting Up Your Tapo Smart Plug
@@ -67,7 +61,7 @@ pip install tapo psutil
 - **[Setup Tapo Smart Plug](https://www.youtube.com/watch?v=Mbzdlxxn3cw)**
 
 ## Configuration
-- **tapo_creds.txt**: Stores Tapo credentials (username, password) and IP address for the smart plug.
+- **tapo_creds.txt**: Stores Tapo credentials (username, password) and static IP of the smart plug.
 - **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 3 minutes. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
 ## Logging
@@ -83,14 +77,13 @@ The script has a built-in retry mechanism for temporary connection issues with t
 
 ## Future Improvements
 - Customizable battery thresholds via a configuration file.
-- Integration with additional smart plug brands.
 - More robust retry logic with exponential backoff for handling network failures.
 
 ## License
 This project is licensed under the MIT License.
 
 ## Running Tests
-- Add testing steps here...
+- Launch ```run_gautocharger.bat``` inside GAUTOCHARGER folder
 
 ## Optimizations
 - Add optimization statements here...
