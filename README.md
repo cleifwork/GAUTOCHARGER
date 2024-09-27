@@ -40,7 +40,8 @@ To run this project, you will need to add the following environment variables to
 
 **INVOLVED APPS:**
 - Python (3.11..)
-- Tapo 
+- **[Unofficial Tapo API](https://github.com/mihai-dinculescu/tapo)**
+
 
 ### 1. SHOULD HAVE A WINDOWS LAPTOP
 > [!NOTE] 
@@ -49,7 +50,12 @@ To run this project, you will need to add the following environment variables to
 - [Install python](https://www.python.org/downloads/) (recommended version: _**python-3.11.4**_)
 > [!NOTE] 
 > Always check "Use admin privilege..." and "Add python.exe to PATH" during installation to avoid errors
-  	
+
+**Install the following libraries via CMD**
+```
+pip install tapo psutil
+```
+
 - Download **[GAUTOCHARGER-V2](https://github.com/cleifwork/GAUTOCHARGER)**
 - Click Code > Download Zip
 - Extract main folder to your Desktop
