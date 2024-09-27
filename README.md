@@ -61,24 +61,24 @@ pip install tapo psutil
 	- Paste EventGhost shortcut in the startup window
 
 ### 2. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG
-> Setting Up Your Tapo Smart Plug and Creating a Tapo Account
+> Creating a Tapo Account and Setting Up Your Tapo Smart Plug
 
 - **[Create Tapo Account](https://www.youtube.com/watch?v=77Lt1sZykJg)**
 - **[Setup Tapo Smart Plug](https://www.youtube.com/watch?v=Mbzdlxxn3cw)**
 
 ## Configuration
 - **tapo_creds.txt**: Stores Tapo credentials (username, password) and IP address for the smart plug.
-- **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 5 minutes. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
+- **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 3 minutes. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
 ## Logging
-GAutoCharger-V2 logs battery levels and plug actions to a rotating log file located in the /logs/ directory. Logs are rotated daily, with each log file named script_log_YYYYMMDDHHMMSS.txt. Old logs are automatically cleaned up after 7 days.
+GAutoCharger-V2 logs battery levels and plug actions to a rotating log file located in the /logs/ directory. Logs are rotated daily, with each log file named ```script_log.txt.YYYYMMDDHHMMSS``` Old logs are automatically cleaned up after 7 days.
 
 ## Retry Machanism
 The script has a built-in retry mechanism for temporary connection issues with the Tapo Smart Plug. If the plug state fails to fetch or control actions are unsuccessful due to network issues, the script retries the action at the next check interval.
 
 ## How It Works
 1. **Battery Monitoring**: The script uses the psutil library to monitor the laptop's battery percentage and charging status.
-2. **Smart Plug Control**: Based on the battery level thresholds, the script sends commands to the Tapo Smart Plug using the Tapo API to either turn on or off the charging.
+2. **Smart Plug Control**: Based on the battery level thresholds, the script sends commands to the Tapo Smart Plug using the Tapo API to either turn ON or OFF the charging.
 3. **Logging**: Logs battery levels, plug states, and errors for debugging and tracking the system's behavior.
 
 ## Future Improvements
