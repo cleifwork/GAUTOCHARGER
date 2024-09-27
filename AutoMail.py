@@ -88,6 +88,3 @@ def send_email(subject, body, to_email):
 
     except Exception as e:
         log_to_file(log_file_path, f"An error occurred: {e}")
-
-# Usage
-send_email("#PCBatteryGOOD", "", "trigger@applet.ifttt.com")
