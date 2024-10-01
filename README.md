@@ -57,10 +57,10 @@ To run this project, you will need to add the following environment variables to
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
-- Install EventGhost from here _'%USERPROFILE%\Desktop\GAUTOCHARGER\config\EG_0.5.0-rc6_Setup'_ 
+- Install EventGhost from here ```_'%USERPROFILE%\Desktop\GAUTOCHARGER\config\EG_0.5.0-rc6_Setup'_```
 - Launch EventGhost
 	- Click **'Open File'**
-	- Load EventGhost Tree file from here _'%USERPROFILE%\Desktop\GAUTOCHARGER\config\gautocharger_v1'_ 
+	- Load EventGhost Tree file from here ```_'%USERPROFILE%\Desktop\GAUTOCHARGER\config\gautocharger_v1'_```
 	- Type **'shell:startup'** in the run window
 	- Paste EventGhost shortcut in the startup window
 
@@ -87,7 +87,7 @@ To run this project, you will need to add the following environment variables to
 5. **Save and Use the App Password:**
 > [!NOTE] 
 > The app password is displayed only once, so make sure you save it right away.
-- Add and replace your gmail and app password in this file ```'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'```
+- Add and replace your gmail and app password in this file ```_'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'_```
 
 
 ### 3. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG (P100, P105)
