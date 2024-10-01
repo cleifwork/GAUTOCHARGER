@@ -86,8 +86,8 @@ To run this project, you will need to add the following environment variables to
 	- Copy the app password (without spaces) and use it in place of your Google account password in your script or app when sending emails.
 5. **Save and Use the App Password:**
 > [!NOTE] 
-> The app password is displayed only once, so make sure you save it in a secure location.
-	- Replace your gmail and app password in this file _'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'_
+> The app password is displayed only once, so make sure you save it right away.
+	- Add and replace your gmail and app password in this file _'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'_
 
 
 ### 3. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG (P100, P105)
