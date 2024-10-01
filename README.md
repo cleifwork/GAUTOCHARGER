@@ -66,29 +66,28 @@ To run this project, you will need to add the following environment variables to
 
 ### 2. SHOULD HAVE A GOOGLE ACCOUNT
 > Obtain an App Password for Google Account
-1. Enable 2-Step Verification:
+1. **Enable 2-Step Verification:**
 	- App passwords are only available if you have 2-Step Verification (also known as two-factor authentication) enabled on your Google account.
 	- If you haven’t enabled it yet, follow these steps:
 		1. Go to the Google Account Security page.
 		2. Scroll down to “Signing in to Google” and click on 2-Step Verification.
 		3. Click Get Started, follow the instructions, and set up 2-Step Verification (you can use your phone for this).
-2. Go to App Passwords:
+2. **Go to App Passwords:**
 	- Once 2-Step Verification is enabled, go back to the Google Account Security page.
 	- Scroll down to the “Signing in to Google” section.
 	- Click on App passwords.
-3. Create an App Password:
+3. **Create an App Password:**
 	- You may need to enter your Google account password again to access this page.
 	- Under the Select app dropdown, choose Mail (or another option if you prefer).
 	- Under Select device, choose the device you’ll be using the app password for (e.g., your computer).
 	- Click Generate.
-4. Use the App Password:
+4. **Use the App Password:**
 	- Google will generate a 16-character App Password. It will look something like this: abcd efgh ijkl mnop.
 	- Copy the app password (without spaces) and use it in place of your Google account password in your script or app when sending emails.
-5. Save and Use the App Password:
-	- The app password is displayed only once, so make sure you save it in a secure location.
-	- You can now use this password in your email scripts for sending emails automatically.
-6. Revoke an App Password (if needed):
-	- If you want to stop using the app password for any reason, go back to the App passwords page and revoke it by clicking the trash icon next to the app password you want to remove.
+5. **Save and Use the App Password:**
+> [!NOTE] 
+> The app password is displayed only once, so make sure you save it in a secure location.
+	- Replace your gmail and app password in this file _'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'_
 
 
 ### 3. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG (P100, P105)
