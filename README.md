@@ -126,68 +126,11 @@ To run this project, you will need to add the following environment variables to
 	- _You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup._
 	- _Done! You're now signed up for IFTTT and can start creating applets._
 
-### 4. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG _(Cuts/restores power supply to the laptop's power adapter)_
-> Setting Up Your Tapo Smart Plug and Creating a Tapo Account
+### 4. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG
+> Creating a Tapo Account and Setting Up Your Tapo Smart Plug
 
-**Step 1: Unbox and Prepare Your Tapo Smart Plug**
-- Unbox the Smart Plug:
-	- _Remove the Tapo Smart Plug from its packaging._
-	- _Ensure you have the plug and any included documentation._
-
-- Choose a Location:
-	- _Find a power outlet where you want to use the Tapo Smart Plug._
-	- _Ensure the location has a stable Wi-Fi signal, as the plug will connect to your home network._
-
-- Plug It In:
-	- _Insert the Tapo Smart Plug into the chosen power outlet._
-	- _The LED indicator on the plug should start blinking orange and green, indicating it’s ready to be set up._
-
-**Step 2: Download and Install the Tapo App**
-- Download the Tapo App:
-	- _On your smartphone, open the App Store (iOS) or Google Play Store (Android)._
-	- _Search for **"Tapo"** and download the official app developed by TP-Link._
-
-- Install the App:
-	- _Once downloaded, install the app on your smartphone._
-
-**Step 3: Create a Tapo Account**
-- Open the Tapo App:
-	- _Launch the Tapo app on your smartphone._
-
-- Sign Up for a Tapo Account:
-	- _On the welcome screen, tap **"Sign Up."**_
-	- _Enter your email address and create a password._
-	- _Agree to the terms of service and privacy policy._
-	- _Tap **"Sign Up."**_
-
-- Verify Your Email Address:
-	- _Check your email for a verification message from Tapo._
-	- _Click the verification link in the email to confirm your account._
-
-- Log In to Your Tapo Account:
-	- _Return to the Tapo app and log in using your newly created account credentials._
-
-**Step 4: Set Up the Tapo Smart Plug in the App**
-- Add a New Device:
-	- _After logging in, tap the "+" (plus) icon in the app to add a new device._
-	- _Select **"Smart Plug"** from the list of devices._
-
-- Connect to Wi-Fi:
-	- _Follow the on-screen instructions to connect your smartphone to the Tapo Smart Plug's temporary Wi-Fi network (SSID)._
-	- _Once connected, return to the Tapo app._
-
-- Configure Wi-Fi Settings:
-	- _The app will prompt you to select your home Wi-Fi network._
-	- _Choose your Wi-Fi network, enter the password, and tap **"Next."**_
-	- _The Tapo Smart Plug will connect to your home network._
-
-- Name Your Smart Plug:
-	- _Give your Smart Plug a name (e.g., **"GAUTOCHARGER"**)._
-	- _Assign it to a room if you wish._
-
-- Complete the Setup:
-	- _Once the setup is complete, the LED indicator on the Smart Plug will turn solid green, indicating a successful connection._
-	- _You can now control the plug via the Tapo app._
+- **[Create Tapo Account](https://www.youtube.com/watch?v=77Lt1sZykJg)**
+- **[Setup Tapo Smart Plug](https://www.youtube.com/watch?v=Mbzdlxxn3cw)**
 
 
 ## Running Tests
