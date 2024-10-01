@@ -31,7 +31,7 @@
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your **GAUTOCHARGER** folder.
-`credentials.json` (File contains OAuth2.0 Client ID and Client Secret)
+`g_creds.config` (file contains gmail credentials to authenticate gmail sending)
 
 ## Installation & Configuration
 
@@ -87,7 +87,7 @@ To run this project, you will need to add the following environment variables to
 5. **Save and Use the App Password:**
 > [!NOTE] 
 > The app password is displayed only once, so make sure you save it right away.
-- Add and replace your gmail and app password in this file _'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'_
+- Add and replace your gmail and app password in this file ```'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'```
 
 
 ### 3. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG (P100, P105)
