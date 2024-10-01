@@ -12,7 +12,7 @@
 - **IFTTT Account:** To receive email triggers and automate power control.
 - **Tapo Smart Plug:** Compatible models include P100, P105, etc.
 - **Tapo Account:** Required to manage your Tapo Smart Plugs.
-- **Python 3.11:** The script requires Python to execute the automation logic.
+- **Python 3.11+** The script requires Python to execute the automation logic.
 
 ## **How It Works**
 - **Trigger:** EventGhost monitors the laptop's battery level and executes a script that sends an email to IFTTT when the battery level reaches a predefined threshold.
@@ -65,43 +65,6 @@ To run this project, you will need to add the following environment variables to
 	- Paste EventGhost shortcut in the startup window
 
 ### 2. SHOULD HAVE A GOOGLE ACCOUNT
-## Step 1: Create a New Project in Google Cloud Console (You may use existing project)
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
-2. In the top left corner, click the project selector dropdown (next to “Google Cloud”).
-3. Click New Project.
-4. Enter a Project Name (e.g., "Desktop App Project").
-5. Click Create.
-
-## Step 2: Enable the Required APIs
-1. After creating the project, go to the API & Services dashboard:
-2. From the menu (≡), go to APIs & Services > Library.
-3. Search for the Google APIs you need. For example:
-	- Gmail API (if you're sending emails).
-4. Click Enable for the APIs you want to use.
-
-## Step 3: Set up the OAuth Consent Screen
-1. Go to APIs & Services > OAuth consent screen.
-2. Choose External (since this is for an app used outside your organization).
-3. Click Create.
-4. Fill in the following details:
-	- App Name: Choose a name for your app (e.g., "My Desktop App").
-	- User Support Email: Provide your email address.
-	- Developer Contact Information: Provide your email address.
-5. Click Save and Continue.
-
-## Step 4: Create OAuth 2.0 Client ID
-1. Go to APIs & Services > Credentials.
-2. Click on + Create Credentials at the top.
-3. Select OAuth 2.0 Client ID.
-4. For Application Type, select Desktop app.
-5. Enter a name for the Desktop Client (e.g., "My Desktop OAuth").
-6. Click Create.
-
-## Step 5: Download Client Secret
-1. After creating the OAuth client, you’ll see the Client ID and Client Secret.
-2. Click Download to save the credentials as a **_"credentials.json"_** file in **_'%USERPROFILE%\Desktop\GAUTOCHARGER'_**  
-3. Click OK to finish.
-
    
 ### 3. SHOULD HAVE IFTTT ACCOUNT
 - **Signing Up for IFTTT Using Google Account on a Web Browser:**
