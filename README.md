@@ -53,7 +53,7 @@ To run this project, you will need to add the following environment variables to
 > [!NOTE] 
 > Always check "Use admin privilege..." and "Add python.exe to PATH" during installation to avoid errors
   	
-- Download **[GAUTOCHARGER](https://github.com/cleifwork/GAUTOCHARGER)**
+- Download **[GAUTOCHARGER-V1](https://github.com/cleifwork/GAUTOCHARGER/tree/GAUTOCHARGER-V1)**
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
@@ -92,7 +92,7 @@ To run this project, you will need to add the following environment variables to
 	- [PCBatteryLOW](https://ift.tt/XJS4DhE)
 	- [PCBatteryGOOD](https://ift.tt/DkObnye)
 
-### 4. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG
+### 4. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG (P100, P105)
 > Creating a Tapo Account and Setting Up Your Tapo Smart Plug
 
 - **[Create Tapo Account](https://www.youtube.com/watch?v=77Lt1sZykJg)**
