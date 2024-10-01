@@ -105,18 +105,17 @@ To run this project, you will need to add the following environment variables to
    
 ### 3. SHOULD HAVE IFTTT ACCOUNT
 - **Signing Up for IFTTT Using Google Account on a Web Browser:**
-	- _Visit the [IFTTT Website](https://ifttt.com/explore)_
-	- _Open your web browser and go to IFTTT's official website._
+	- _Open your web browser and navigate to [IFTTT Website](https://ifttt.com/explore)_
 
 - **Start the Sign-Up Process:**
 	- _Click on the **"Sign up"** button, usually located at the top right corner of the page._
 
 - **Sign Up with Google:**
-	- _Choose the **"Continue with Google"** option on the sign-up page._
+	- _On the sign-up page, select the **"Continue with Google"** option._
 
 - **Log in to Your Google Account:**
-	- _A Google sign-in window will appear._
-	- _Select the Google account you want to use._ 
+	- _A Google sign-in window will pop up._
+	- _Select the Google account you want to use for IFTTT._ 
 	- _If you're not logged in, enter your Google email and password, then click "Next."_
 
 - **Grant Permissions:**
@@ -125,6 +124,7 @@ To run this project, you will need to add the following environment variables to
 - **Complete the Sign-Up:**
 	- _You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup._
 	- _Done! You're now signed up for IFTTT and can start creating applets._
+
 - **Use these Published Applets:**
 	- [PCBatteryLOW](https://ift.tt/XJS4DhE)
 	- [PCBatteryGOOD](https://ift.tt/DkObnye)
