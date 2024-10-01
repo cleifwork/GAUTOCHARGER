@@ -103,7 +103,7 @@ To run this project, you will need to add the following environment variables to
 3. Click OK to finish.
 
    
-### 3. SHOULD HAVE IFTTT ACCOUNT _(Responds to the email trigger)_
+### 3. SHOULD HAVE IFTTT ACCOUNT
 - **Signing Up for IFTTT Using Google Account on a Web Browser:**
 	- _Visit the [IFTTT Website](https://ifttt.com/explore)_
 	- _Open your web browser and go to IFTTT's official website._
@@ -125,6 +125,9 @@ To run this project, you will need to add the following environment variables to
 - **Complete the Sign-Up:**
 	- _You’ll be redirected back to IFTTT. Follow any additional prompts to finalize your profile setup._
 	- _Done! You're now signed up for IFTTT and can start creating applets._
+- **Use these Published Applets:**
+	- [PCBatteryLOW](https://ift.tt/XJS4DhE)
+	- [PCBatteryGOOD](https://ift.tt/DkObnye)
 
 ### 4. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG
 > Creating a Tapo Account and Setting Up Your Tapo Smart Plug
