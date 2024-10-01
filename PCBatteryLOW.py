@@ -1,4 +1,4 @@
-from AutoMail import send_email
+from AutoMailSMTP import send_email
 
 # Battery LOW Trigger, Power ON
 send_email("#PCBatteryLOW", "", "trigger@applet.ifttt.com")
