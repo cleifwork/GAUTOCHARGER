@@ -87,7 +87,7 @@ To run this project, you will need to add the following environment variables to
 5. **Save and Use the App Password:**
 > [!NOTE] 
 > The app password is displayed only once, so make sure you save it right away.
-	- Add and replace your gmail and app password in this file _'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'_
+- Add and replace your gmail and app password in this file _'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'_
 
 
 ### 3. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG (P100, P105)
