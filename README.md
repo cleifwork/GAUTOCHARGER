@@ -57,15 +57,15 @@ To run this project, you will need to add the following environment variables to
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
-- Install EventGhost from here ```_'%USERPROFILE%\Desktop\GAUTOCHARGER\config\EG_0.5.0-rc6_Setup'_```
+- Install EventGhost from here ```'%USERPROFILE%\Desktop\GAUTOCHARGER\config\EG_0.5.0-rc6_Setup'```
 - Launch EventGhost
 	- Click **'Open File'**
-	- Load EventGhost Tree file from here ```_'%USERPROFILE%\Desktop\GAUTOCHARGER\config\gautocharger_v1'_```
+	- Load EventGhost Tree file from here ```'%USERPROFILE%\Desktop\GAUTOCHARGER\config\gautocharger_v1'```
 	- Type **'shell:startup'** in the run window
 	- Paste EventGhost shortcut in the startup window
 
 ### 2. SHOULD HAVE A GOOGLE ACCOUNT
-> Obtain an App Password for Google Account
+> [Obtain an App Password for Google Account](https://www.youtube.com/watch?v=MkLX85XU5rU)
 1. **Enable 2-Step Verification:**
 	- App passwords are only available if you have 2-Step Verification (also known as two-factor authentication) enabled on your Google account.
 	- If you haven’t enabled it yet, follow these steps:
@@ -87,7 +87,7 @@ To run this project, you will need to add the following environment variables to
 5. **Save and Use the App Password:**
 > [!NOTE] 
 > The app password is displayed only once, so make sure you save it right away.
-- Add and replace your gmail and app password in this file ```_'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'_```
+- Add and replace your gmail and app password in this file ```'%USERPROFILE%\Desktop\GAUTOCHARGER\g_creds.config'```
 
 
 ### 3. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG (P100, P105)
