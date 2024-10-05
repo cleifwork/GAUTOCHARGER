@@ -61,6 +61,9 @@ pip install tapo psutil
 - **[Setup Tapo Smart Plug](https://www.youtube.com/watch?v=Mbzdlxxn3cw)**
 
 ## Configuration
+> [!INFO]
+- **[How to get Tapo Smart Plug's IP & MAC address then set to STATIC in your router](https://www.youtube.com/watch?v=lYJgfnz1bg0)**
+
 - **tapo_creds.txt**: Stores Tapo credentials (username, password) and static IP of the smart plug.
 - **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 3 minutes. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
