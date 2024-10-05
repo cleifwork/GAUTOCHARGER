@@ -6,15 +6,32 @@ import asyncio
 from tapo import ApiClient
 from logging.handlers import TimedRotatingFileHandler
 
-# Function to read credentials from the text file
-def read_credentials(file_path):
-    credentials = {}
-    with open(file_path, 'r') as file:
-        for line in file:
-            if '=' in line:
-                key, value = line.strip().split('=', 1)
-                credentials[key] = value
-    return credentials
+def read_config(file_path):
+    config = {}
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                if '=' in line:
+                    key, value = line.strip().split('=', 1)
+                    config[key] = int(value)  # Ensure the values are integers
+    except FileNotFoundError:
+        log_error(f"Config file '{file_path}' not found. Using default values.")
+        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+    except ValueError as e:
+        log_error(f"Error parsing values in '{file_path}': {e}. Ensure all values are valid integers. Using default values.")
+        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+    except Exception as e:
+        log_error(f"Unexpected error while reading '{file_path}': {e}. Using default values.")
+        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+
+    # Ensure all required config values are present
+    required_keys = ['battery_level_ON', 'battery_level_OFF', 'plug_control_frequency']
+    for key in required_keys:
+        if key not in config:
+            log_error(f"Missing required configuration '{key}' in {file_path}. Using default values.")
+            return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+    
+    return config
 
 # Ensure the logs directory exists
 if not os.path.exists("logs"):
@@ -34,15 +51,29 @@ logging.getLogger().addHandler(handler)
 logging.getLogger().setLevel(logging.DEBUG)
 
 # Read credentials from the text file
-creds = read_credentials("tapo_creds.config")
+def read_credentials(file_path):
+    credentials = {}
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                if '=' in line:
+                    key, value = line.strip().split('=', 1)
+                    credentials[key] = value
+    except FileNotFoundError:
+        log_error(f"Credentials file '{file_path}' not found. Exiting program.")
+        exit(1)
+    return credentials
 
 # Ensure credentials are available
+creds = read_credentials("tapo_creds.config")
+
 tapo_username = creds.get("username")
 tapo_password = creds.get("password")
 ip_address = creds.get("ip_address")
 
 if not tapo_username or not tapo_password or not ip_address:
-    raise ValueError("Missing TAPO credentials or IP address in the tapo_creds.txt file.")
+    log_error("Missing TAPO credentials or IP address in the tapo_creds.txt file. Exiting program.")
+    exit(1)
 
 # Print and log utility functions
 def print_to_console(message):
@@ -75,7 +106,8 @@ async def get_plug_state(retries=3, delay=2):
                 print_to_console(f"Retrying in {delay} seconds...")
                 await asyncio.sleep(delay)
             else:
-                raise  # Raise the exception if all retries fail
+                log_error("Failed to get plug state after multiple attempts. Exiting program.")
+                exit(1)  # Exit if all retries fail
 
 # Retry mechanism for the plug control
 async def control_plug(action, retries=3, delay=2):
@@ -105,10 +137,11 @@ async def control_plug(action, retries=3, delay=2):
                 print_to_console(f"Retrying in {delay} seconds...")
                 await asyncio.sleep(delay)
             else:
-                raise  # Raise the exception if all retries fail
+                log_error("Failed to control plug after multiple attempts. Exiting program.")
+                exit(1)  # Exit if all retries fail
 
 # Function to check the battery and decide on Tapo plug action
-async def check_battery_and_control_plug():
+async def check_battery_and_control_plug(config):
     try:
         battery = psutil.sensors_battery()
         if battery:
@@ -119,10 +152,10 @@ async def check_battery_and_control_plug():
             log_message = f"Battery Level: {percent}% - Plugged In: {plugged}"
             log_to_file(log_message)  # Log to file
 
-            # Control the plug based on battery level
-            if percent <= 20 and not plugged:
+            # Control the plug based on battery level and config thresholds
+            if percent <= config['battery_level_ON'] and not plugged:
                 await control_plug("on")  # Turn on the plug
-            elif percent >= 90 and plugged:
+            elif percent >= config['battery_level_OFF'] and plugged:
                 await control_plug("off")  # Turn off the plug
         else:
             message = "Battery information not available."
@@ -133,15 +166,23 @@ async def check_battery_and_control_plug():
 
 # Main async loop
 async def main():
+    # Load config values from the config file
+    try:
+        config = read_config("battery_level.config")
+    except (FileNotFoundError, ValueError) as e:
+        log_error(str(e))
+        print_to_console(str(e))
+        return  # Exit if config cannot be loaded
+
     last_check_time = time.time()
     last_print_time = time.time()
 
     while True:
         current_time = time.time()
 
-        # Check battery and control plug every 5 minutes (300 seconds)
-        if current_time - last_check_time >= 300:
-            await check_battery_and_control_plug()
+        # Check battery and control plug based on the config's control frequency
+        if current_time - last_check_time >= config['plug_control_frequency']:
+            await check_battery_and_control_plug(config)
             last_check_time = current_time
 
         # Print battery level and plugged status every 20 seconds

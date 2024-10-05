@@ -79,7 +79,6 @@ The script has a built-in retry mechanism for temporary connection issues with t
 3. **Logging**: Logs battery levels, plug states, and errors for debugging and tracking the system's behavior.
 
 ## Future Improvements
-- Customizable battery thresholds via a configuration file.
 - More robust retry logic with exponential backoff for handling network failures.
 
 ## License
@@ -89,7 +88,7 @@ This project is licensed under the MIT License.
 - Launch ```run_gautocharger.bat``` inside GAUTOCHARGER folder
 
 ## Optimizations
-- Add optimization statements here...
+- Customizable battery thresholds and plug control frequency via a configuration file.
 
 ## Screenshots
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1Vro6VWORnAFdjA1cgl-9VerqrLVbPYu7)
