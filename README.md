@@ -97,7 +97,7 @@ To run this project, you will need to add the following environment variables to
 
 ### 4. SHOULD HAVE IFTTT ACCOUNT
 - **[Signing Up for IFTTT Using Google Account on a Web Browser:](https://www.youtube.com/watch?v=dsIPK-fWXoc)**
-	- _Open your web browser and navigate to [IFTTT Website](https://ifttt.com/explore)_
+	- _[IFTTT Website](https://ifttt.com/explore)_
 
 - **Use these Published Applets:**
 	- [PCBatteryLOW](https://ift.tt/XJS4DhE)
