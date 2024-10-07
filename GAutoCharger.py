@@ -6,6 +6,33 @@ import asyncio
 from tapo import ApiClient
 from logging.handlers import TimedRotatingFileHandler
 
+# Ensure the logs directory exists
+if not os.path.exists("logs"):
+    os.makedirs("logs")
+
+# Directory where logs will be saved
+log_file_path = "logs/script_log.txt"
+
+# Create a TimedRotatingFileHandler
+handler = TimedRotatingFileHandler(log_file_path, when="midnight", interval=1, backupCount=7)
+handler.suffix = "%Y%m%d"  # The format for the rotated filenames
+formatter = logging.Formatter('%(asctime)s - %(message)s')
+handler.setFormatter(formatter)
+
+# Configure logger
+logging.getLogger().addHandler(handler)
+logging.getLogger().setLevel(logging.DEBUG)
+
+# Print and log utility functions
+def print_to_console(message):
+    print(message)
+
+def log_to_file(message):
+    logging.info(message)
+
+def log_error(message):
+    logging.error(message)
+
 def read_config(file_path):
     config = {}
     try:
@@ -33,23 +60,6 @@ def read_config(file_path):
     
     return config
 
-# Ensure the logs directory exists
-if not os.path.exists("logs"):
-    os.makedirs("logs")
-
-# Directory where logs will be saved
-log_file_path = "logs/script_log.txt"
-
-# Create a TimedRotatingFileHandler
-handler = TimedRotatingFileHandler(log_file_path, when="midnight", interval=1, backupCount=7)
-handler.suffix = "%Y%m%d"  # The format for the rotated filenames
-formatter = logging.Formatter('%(asctime)s - %(message)s')
-handler.setFormatter(formatter)
-
-# Configure logger
-logging.getLogger().addHandler(handler)
-logging.getLogger().setLevel(logging.DEBUG)
-
 # Read credentials from the text file
 def read_credentials(file_path):
     credentials = {}
@@ -74,16 +84,6 @@ ip_address = creds.get("ip_address")
 if not tapo_username or not tapo_password or not ip_address:
     log_error("Missing TAPO credentials or IP address in the tapo_creds.txt file. Exiting program.")
     exit(1)
-
-# Print and log utility functions
-def print_to_console(message):
-    print(message)
-
-def log_to_file(message):
-    logging.info(message)
-
-def log_error(message):
-    logging.error(message)
 
 # Modify get_plug_state to log the device info and not print it to the console
 async def get_plug_state(retries=3, delay=2):
