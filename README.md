@@ -12,7 +12,7 @@
 - Smart Plug Integration: Communicates with Tapo Smart Plug through the Tapo API, allowing remote control of the power outlet connected to your laptop’s charger.
 - Daily Log Rotation: Generates daily logs stored in the ```/logs/``` directory with automatic log rotation, ensuring minimal maintenance and easy tracking of battery status.
 - Resilient Retry Mechanism: Built-in retry logic for handling temporary connection issues with the Tapo Smart Plug.
-- Configurable Parameters: Easy-to-set thresholds and other parameters in the ```tapo_creds.txt``` file for quick configuration.
+- Configurable Parameters: Easy-to-set thresholds and other parameters in the ```battery_level.config``` file for quick configuration.
 
 ## Requirements
 - Python 3.11+
@@ -32,7 +32,7 @@
 
 ## Environment Variables
 To run this project, you will need to add the following environment variables to your **GAUTOCHARGER** folder.
-`credentials.json` (File contains OAuth2.0 Client ID and Client Secret)
+`tapo_creds.config` (File contains tapo credentials and static IP of the smart plug)
 
 ## Installation
 
