@@ -20,7 +20,7 @@
 
 
 ## Demo
-- [GConnect App Demo](https://www.youtube.com/)
+- [GAutoCharger-V2 App Demo](https://www.youtube.com/watch?v=QEfLKXhg03o)
 - [GConnect Installation & Configuration](https://www.youtube.com/)
 
 ## Authors
