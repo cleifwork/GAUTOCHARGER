@@ -70,7 +70,7 @@ pip install tapo psutil
 GAutoCharger-V2 logs battery levels and plug actions to a rotating log file located in the /logs/ directory. Logs are rotated daily, with each log file named ```script_log.txt.YYYYMMDDHHMMSS``` Old logs are automatically cleaned up after 7 days.
 
 ## Retry Machanism
-The script has a built-in retry mechanism for temporary connection issues with the Tapo Smart Plug. If the plug state fails to fetch or control actions are unsuccessful due to network issues, the script retries the action at the next check interval.
+The script has a built-in retry mechanism for temporary connection issues with the Tapo Smart Plug. If the plug state fails to fetch or control actions are unsuccessful due to network issues, the script retries 3  times before terminating itself to avoid further issues.
 
 ## How It Works
 1. **Battery Monitoring**: The script uses the psutil library to monitor the laptop's battery percentage and charging status.
