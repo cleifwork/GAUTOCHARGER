@@ -15,8 +15,8 @@
 - Python Libraries (```tapo```, ```psutil```)
 - Tapo Smart Plug (P100, P105)
 - Tapo Account
-- Tapo Credentials (username, password, smartplug static IP)
-- **[Unofficial Tapo API](https://github.com/mihai-dinculescu/tapo)**: For usage reference
+- Tapo Credentials (username, password, smartplug IP)
+- **[Unofficial Tapo API](https://github.com/mihai-dinculescu/tapo)**: For usage 
 
 
 ## Demo
@@ -35,6 +35,10 @@ To run this project, you will need to add the following environment variables to
 ### 1. SHOULD HAVE A WINDOWS LAPTOP
 > [!NOTE] 
 > Tested using Windows 10 and Windows 11
+
+- **Some pre-requisites (is a must)**
+    1. Laptop and Smartplug must be connected to the same network
+    2. Smartplug's IP must be STATIC
 
 - [Install python](https://www.python.org/downloads/) (recommended version: _**python-3.11.4**_)
 > [!NOTE] 
