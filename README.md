@@ -30,7 +30,7 @@
 
 ## Environment Variables
 To run this project, you will need to add the following environment variables to your **GAUTOCHARGER** folder.
-`tapo_creds.config` (File contains tapo credentials and static IP of the smart plug)
+`tapo_creds.config`
 
 ## Installation
 
