@@ -58,7 +58,7 @@ pip install tapo psutil
 - **[Create Tapo Account](https://www.youtube.com/watch?v=77Lt1sZykJg)**
 - **[Setup Tapo Smart Plug](https://www.youtube.com/watch?v=Mbzdlxxn3cw)** 
 
-[!IMPORTANT]
+> [!IMPORTANT]
 > Replace **username**, **password** and **ip_address** in the ```tapo_creds.config``` file with your tapo account and smartplug's IP
 
 ## Configuration
