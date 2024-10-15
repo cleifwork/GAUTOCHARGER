@@ -56,12 +56,14 @@ pip install tapo psutil
 > Creating a Tapo Account and Setting Up Your Tapo Smart Plug
 
 - **[Create Tapo Account](https://www.youtube.com/watch?v=77Lt1sZykJg)**
-- **[Setup Tapo Smart Plug](https://www.youtube.com/watch?v=Mbzdlxxn3cw)**
+- **[Setup Tapo Smart Plug](https://www.youtube.com/watch?v=Mbzdlxxn3cw)** 
+
+[!IMPORTANT]
+> Replace **username**, **password** and **ip_address** in the ```tapo_creds.config``` file with your tapo account and smartplug's IP
 
 ## Configuration
 - **[How to get Tapo Smart Plug's IP & MAC address then set to STATIC in your router](https://www.youtube.com/watch?v=lYJgfnz1bg0)**
-
-- **tapo_creds.txt**: Stores Tapo credentials (username, password) and static IP of the smart plug.
+- **tapo_creds.config**: Stores Tapo credentials (username, password) and static IP of the smart plug.
 - **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 3 minutes. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
 ## Logging
@@ -79,7 +81,10 @@ The script has a built-in retry mechanism for temporary connection issues with t
 - More robust retry logic with exponential backoff for handling network failures.
 
 ## Running Tests
-- Launch ```run_gautocharger.bat``` inside GAUTOCHARGER folder
+- (CMD) Ping smartplug's IP from the laptop to confirm they're on the same network
+    - IF NOT need to troubleshoot
+    - IF OK proceed to the **NEXT STEP**
+- **NEXT STEP:** Launch ```run_gautocharger.bat``` inside GAUTOCHARGER folder
 
 ## Optimizations
 - Customizable battery thresholds and plug control frequency via a configuration file.
