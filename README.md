@@ -23,7 +23,7 @@
 
 ## Demo
 - [GAutoCharger-V2 App Demo](https://www.youtube.com/watch?v=QEfLKXhg03o)
-- [GConnect Installation & Configuration](https://www.youtube.com/)
+- [GAutoCharger-V2 Installation & Configuration](https://www.youtube.com/watch?v=zHy7FS_HU7o)
 
 ## Authors
 - [@cleifwork](https://www.github.com/cleifwork)
@@ -57,12 +57,12 @@ pip install tapo psutil
 
 - **[Create Tapo Account](https://www.youtube.com/watch?v=77Lt1sZykJg)**
 - **[Setup Tapo Smart Plug](https://www.youtube.com/watch?v=Mbzdlxxn3cw)** 
+- **[How to get Tapo Smart Plug's IP & MAC address then set to STATIC in your router](https://www.youtube.com/watch?v=lYJgfnz1bg0)**
 
 > [!IMPORTANT]
 > Replace **username**, **password** and **ip_address** in the ```tapo_creds.config``` file with your tapo account and smartplug's IP
 
 ## Configuration
-- **[How to get Tapo Smart Plug's IP & MAC address then set to STATIC in your router](https://www.youtube.com/watch?v=lYJgfnz1bg0)**
 - **tapo_creds.config**: Stores Tapo credentials (username, password) and static IP of the smart plug.
 - **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 3 minutes. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
