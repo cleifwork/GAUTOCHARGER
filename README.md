@@ -47,7 +47,7 @@ To run this project, you will need to add the following environment variables to
 pip install tapo psutil
 ```
 
-- Download **[GAUTOCHARGER-V2](https://github.com/cleifwork/GAUTOCHARGER)**
+- Download **[GAUTOCHARGER-V2](https://github.com/cleifwork/GAUTOCHARGER/tree/GAUTOCHARGER-V2)**
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
