@@ -107,7 +107,7 @@ async def get_plug_state(retries=3, delay=2):
                 await asyncio.sleep(delay)
             else:
                 log_error("Failed to get plug state after multiple attempts. Exiting program.")
-                exit(1)  # Exit if all retries fail
+                return None
 
 # Retry mechanism for the plug control
 async def control_plug(action, retries=3, delay=2):
@@ -138,7 +138,7 @@ async def control_plug(action, retries=3, delay=2):
                 await asyncio.sleep(delay)
             else:
                 log_error("Failed to control plug after multiple attempts. Exiting program.")
-                exit(1)  # Exit if all retries fail
+                return
 
 # Function to check the battery and decide on Tapo plug action
 async def check_battery_and_control_plug(config):
