@@ -1,6 +1,6 @@
-# GAUTOCHARGER-V2: AutoCharging Solution
+# GAUTOCHARGER-V3: AutoCharging Solution
 
-**GAutoCharger-V2** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
+**GAutoCharger-V3** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
 
 ## Features
 - Automated Charging Control: Automatically turns on the smart plug when the battery level is low and turns it off when the battery is full, based on configurable thresholds.
@@ -11,19 +11,18 @@
 - Configurable Parameters: Easy-to-set thresholds and other parameters in the ```battery_level.config``` file for quick configuration.
 
 ## Requirements
-- Python 3.11+
-- Python Libraries (```tapo```, ```psutil```)
-- Tapo Smart Plug (P100, P105)
-- Tapo Account
-- Tapo Credentials (username, password, smartplug IP)
-- Laptop and Smartplug must be connected to the same network
-- Smartplug's IP must be STATIC
-- **[Unofficial Tapo API](https://github.com/mihai-dinculescu/tapo)**: (_for usage reference_)
+- **Python 3.11..**
+- **Python Libraries** (```psutil```)
+- **IFTTT Account:** To receive email triggers and automate power control.
+- **Tapo Smart Plug:** Compatible models include P100, P105, etc.
+- **Tapo Account:** Required to manage your Tapo Smart Plugs.
+- **Python 3.11+** The script requires Python to execute the automation logic.
+- **Google App Password** [Need to generate app password to allow email sending](https://myaccount.google.com/apppasswords) 
 
 
 ## Demo
-- [GAutoCharger-V2 App Demo](https://www.youtube.com/watch?v=QEfLKXhg03o)
-- [GAutoCharger-V2 Installation & Configuration](https://www.youtube.com/watch?v=zHy7FS_HU7o)
+- [GAutoCharger-V3 App Demo](https://www.youtube.com/watch?v=QEfLKXhg03o)
+- [GAutoCharger-V3 Installation & Configuration](https://www.youtube.com/watch?v=zHy7FS_HU7o)
 
 ## Authors
 - [@cleifwork](https://www.github.com/cleifwork)
@@ -47,7 +46,7 @@ To run this project, you will need to add the following environment variables to
 pip install tapo psutil
 ```
 
-- Download **[GAUTOCHARGER-V2](https://github.com/cleifwork/GAUTOCHARGER/tree/GAUTOCHARGER-V2)**
+- Download **[GAUTOCHARGER-V3](https://github.com/cleifwork/GAUTOCHARGER/tree/GAUTOCHARGER-V3)**
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
@@ -67,7 +66,7 @@ pip install tapo psutil
 - **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 3 minutes. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
 ## Logging
-GAutoCharger-V2 logs battery levels and plug actions to a rotating log file located in the /logs/ directory. Logs are rotated daily, with each log file named ```script_log.txt.YYYYMMDDHHMMSS``` Old logs are automatically cleaned up after 7 days.
+GAutoCharger-V3 logs battery levels and plug actions to a rotating log file located in the /logs/ directory. Logs are rotated daily, with each log file named ```script_log.txt.YYYYMMDDHHMMSS``` Old logs are automatically cleaned up after 7 days.
 
 ## Retry Machanism
 The script has a built-in retry mechanism for temporary connection issues with the Tapo Smart Plug. If the plug state fails to fetch or control actions are unsuccessful due to network issues, the script retries 3  times before restarting itself.

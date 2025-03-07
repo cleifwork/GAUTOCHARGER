@@ -3,7 +3,7 @@ import time
 import psutil
 import logging
 import asyncio
-from tapo import ApiClient
+from AutoMailSMTP import send_email
 from logging.handlers import TimedRotatingFileHandler
 
 # Ensure the logs directory exists
@@ -60,85 +60,86 @@ def read_config(file_path):
     
     return config
 
-# Read credentials from the text file
-def read_credentials(file_path):
-    credentials = {}
-    try:
-        with open(file_path, 'r') as file:
-            for line in file:
-                if '=' in line:
-                    key, value = line.strip().split('=', 1)
-                    credentials[key] = value
-    except FileNotFoundError:
-        log_error(f"Credentials file '{file_path}' not found. Exiting program.")
-        exit(1)
-    return credentials
+# # Read credentials from the text file
+# def read_credentials(file_path):
+#     credentials = {}
+#     try:
+#         with open(file_path, 'r') as file:
+#             for line in file:
+#                 if '=' in line:
+#                     key, value = line.strip().split('=', 1)
+#                     credentials[key] = value
+#     except FileNotFoundError:
+#         log_error(f"Credentials file '{file_path}' not found. Exiting program.")
+#         exit(1)
+#     return credentials
 
-# Ensure credentials are available
-creds = read_credentials("tapo_creds.config")
+# # Ensure credentials are available
+# creds = read_credentials("tapo_creds.config")
 
-tapo_username = creds.get("username")
-tapo_password = creds.get("password")
-ip_address = creds.get("ip_address")
+# tapo_username = creds.get("username")
+# tapo_password = creds.get("password")
+# ip_address = creds.get("ip_address")
 
-if not tapo_username or not tapo_password or not ip_address:
-    log_error("Missing TAPO credentials or IP address in the tapo_creds.txt file. Exiting program.")
-    exit(1)
+# if not tapo_username or not tapo_password or not ip_address:
+#     log_error("Missing TAPO credentials or IP address in the tapo_creds.txt file. Exiting program.")
+#     exit(1)
 
-# Modify get_plug_state to log the device info and not print it to the console
-async def get_plug_state(retries=3, delay=2):
-    attempt = 0
-    while attempt < retries:
-        try:
-            client = ApiClient(tapo_username, tapo_password)
-            device = await client.p100(ip_address)
-            device_info = await device.get_device_info()
+# # Modify get_plug_state to log the device info and not print it to the console
+# async def get_plug_state(retries=3, delay=2):
+#     attempt = 0
+#     while attempt < retries:
+#         try:
+#             client = ApiClient(tapo_username, tapo_password)
+#             device = await client.p100(ip_address)
+#             device_info = await device.get_device_info()
 
-            # Log the device info instead of printing it to the console
-            log_to_file(f"Device Info: {device_info}")
+#             # Log the device info instead of printing it to the console
+#             log_to_file(f"Device Info: {device_info}")
 
-            # Return the actual state from device_info
-            return device_info.device_on  # Adjust according to actual device_info structure
-        except Exception as e:
-            attempt += 1
-            log_error(f"Error getting plug state (Attempt {attempt}/{retries}): {e}")
-            if attempt < retries:
-                print_to_console(f"Retrying in {delay} seconds...")
-                await asyncio.sleep(delay)
-            else:
-                log_error("Failed to get plug state after multiple attempts. Exiting program.")
-                return None
+#             # Return the actual state from device_info
+#             return device_info.device_on  # Adjust according to actual device_info structure
+#         except Exception as e:
+#             attempt += 1
+#             log_error(f"Error getting plug state (Attempt {attempt}/{retries}): {e}")
+#             if attempt < retries:
+#                 print_to_console(f"Retrying in {delay} seconds...")
+#                 await asyncio.sleep(delay)
+#             else:
+#                 log_error("Failed to get plug state after multiple attempts. Exiting program.")
+#                 return None
 
-# Retry mechanism for the plug control
-async def control_plug(action, retries=3, delay=2):
-    attempt = 0
-    while attempt < retries:
-        try:
-            client = ApiClient(tapo_username, tapo_password)
-            device = await client.p100(ip_address)
-            current_state = await get_plug_state()
+# # Retry mechanism for the plug control
+# async def control_plug(action, retries=3, delay=2):
+#     attempt = 0
+#     while attempt < retries:
+#         try:
+#             client = ApiClient(tapo_username, tapo_password)
+#             device = await client.p100(ip_address)
+#             current_state = await get_plug_state()
 
-            # Wait for 2 seconds before sending the command
-            await asyncio.sleep(2)
+#             # Wait for 2 seconds before sending the command
+#             await asyncio.sleep(2)
 
-            if action == "on" and not current_state:
-                await device.on()
-                print_to_console("Tapo P100 turned on (Battery low)")
-                log_to_file("Tapo P100 turned on (Battery low)")
-            elif action == "off" and current_state:
-                await device.off()
-                print_to_console("Tapo P100 turned off (Battery good)")
-                log_to_file("Tapo P100 turned off (Battery good)")
-            return  # Exit the function on success
-        except Exception as e:
-            attempt += 1
-            log_error(f"Error controlling plug (Attempt {attempt}/{retries}): {e}")
-            if attempt < retries:
-                print_to_console(f"Retrying in {delay} seconds...")
-                await asyncio.sleep(delay)
-            else:
-                log_error("Failed to control plug after multiple attempts. Exiting program.")
-                return
+#             if action == "on" and not current_state:
+#                 await device.on()
+#                 print_to_console("Tapo P100 turned on (Battery low)")
+#                 log_to_file("Tapo P100 turned on (Battery low)")
+#             elif action == "off" and current_state:
+#                 await device.off()
+#                 print_to_console("Tapo P100 turned off (Battery good)")
+#                 log_to_file("Tapo P100 turned off (Battery good)")
+#             return  # Exit the function on success
+#         except Exception as e:
+#             attempt += 1
+#             log_error(f"Error controlling plug (Attempt {attempt}/{retries}): {e}")
+#             if attempt < retries:
+#                 print_to_console(f"Retrying in {delay} seconds...")
+#                 await asyncio.sleep(delay)
+#             else:
+#                 log_error("Failed to control plug after multiple attempts. Exiting program.")
+#                 return
+
 
 # Function to check the battery and decide on Tapo plug action
 async def check_battery_and_control_plug(config):
@@ -154,9 +155,9 @@ async def check_battery_and_control_plug(config):
 
             # Control the plug based on battery level and config thresholds
             if percent <= config['battery_level_ON'] and not plugged:
-                await control_plug("on")  # Turn on the plug
+                send_email("#PCBatteryLOW", "", "trigger@applet.ifttt.com")  # Turn on the plug
             elif percent >= config['battery_level_OFF'] and plugged:
-                await control_plug("off")  # Turn off the plug
+                send_email("#PCBatteryGOOD", "", "trigger@applet.ifttt.com")  # Turn off the plug
         else:
             message = "Battery information not available."
             print_to_console(message)
