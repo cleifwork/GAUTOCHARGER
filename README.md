@@ -68,7 +68,7 @@ pip install tapo psutil
 > [!IMPORTANT]
 > Add your **gmail** and **appass** in the ```g_creds.config``` file.
 
-## Configuratio
+## Configuration
 - **g_creds.config**: Stores the google app password for sending email.
 - **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 1 minute. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
