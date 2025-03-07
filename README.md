@@ -82,8 +82,7 @@ pip install tapo psutil
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1Vro6VWORnAFdjA1cgl-9VerqrLVbPYu7)
 
 ## SUPPORT
-#### [Join our FB Group](https://www.facebook.com/groups/1776872022780742) 
-#### Or subcribe to our [YouTube](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA) Channel
+#### Join our [FB Group](https://www.facebook.com/groups/1776872022780742) Or subscribe to our [YouTube](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA) Channel
 
 ## TECH STACK
 - **Client:** Python Script
