@@ -11,12 +11,11 @@
 - Configurable Parameters: Easy-to-set thresholds and other parameters in the ```battery_level.config``` file for quick configuration.
 
 ## Requirements
-- **Python 3.11..**
+- **Python 3.11+** The script requires Python to execute the automation logic.
 - **Python Libraries** (```psutil```)
 - **IFTTT Account:** To receive email triggers and automate power control.
-- **Tapo Smart Plug:** Compatible models include P100, P105, etc.
 - **Tapo Account:** Required to manage your Tapo Smart Plugs.
-- **Python 3.11+** The script requires Python to execute the automation logic.
+- **Tapo Smart Plug:** Compatible models include P100, P105, etc.
 - **Google App Password** [Need to generate app password to allow email sending](https://myaccount.google.com/apppasswords) 
 
 
