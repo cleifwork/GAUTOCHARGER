@@ -1,4 +1,6 @@
-# GAUTOCHARGER-V2: AutoCharging Solution
+# GAUTOCHARGER-V2: Laptop AutoCharging Solution
+> [!NOTE] 
+> _For Local Network Use_
 
 **GAutoCharger-V2** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
 
@@ -92,13 +94,8 @@ The script has a built-in retry mechanism for temporary connection issues with t
 ## Screenshots
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1Vro6VWORnAFdjA1cgl-9VerqrLVbPYu7)
 
-## Support
-
-#### Join our FB Group
-[GConnect App (Omada Voucher Solution)](https://www.facebook.com/groups/1776872022780742) 
-  
-#### Or subcribe to our YouTube Channel
-[@JDIYMPH](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA)
+## SUPPORT
+#### Join our [FB Group](https://www.facebook.com/groups/1776872022780742) Or subscribe to our [YouTube](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA) Channel
 
 ## Tech Stack
 - **Client:** Python Script, Unofficial Tapo API
