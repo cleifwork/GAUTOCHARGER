@@ -43,103 +43,22 @@ def read_config(file_path):
                     config[key] = int(value)  # Ensure the values are integers
     except FileNotFoundError:
         log_error(f"Config file '{file_path}' not found. Using default values.")
-        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 60}
     except ValueError as e:
         log_error(f"Error parsing values in '{file_path}': {e}. Ensure all values are valid integers. Using default values.")
-        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 60}
     except Exception as e:
         log_error(f"Unexpected error while reading '{file_path}': {e}. Using default values.")
-        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 60}
 
     # Ensure all required config values are present
     required_keys = ['battery_level_ON', 'battery_level_OFF', 'plug_control_frequency']
     for key in required_keys:
         if key not in config:
             log_error(f"Missing required configuration '{key}' in {file_path}. Using default values.")
-            return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+            return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 60}
     
     return config
-
-# # Read credentials from the text file
-# def read_credentials(file_path):
-#     credentials = {}
-#     try:
-#         with open(file_path, 'r') as file:
-#             for line in file:
-#                 if '=' in line:
-#                     key, value = line.strip().split('=', 1)
-#                     credentials[key] = value
-#     except FileNotFoundError:
-#         log_error(f"Credentials file '{file_path}' not found. Exiting program.")
-#         exit(1)
-#     return credentials
-
-# # Ensure credentials are available
-# creds = read_credentials("tapo_creds.config")
-
-# tapo_username = creds.get("username")
-# tapo_password = creds.get("password")
-# ip_address = creds.get("ip_address")
-
-# if not tapo_username or not tapo_password or not ip_address:
-#     log_error("Missing TAPO credentials or IP address in the tapo_creds.txt file. Exiting program.")
-#     exit(1)
-
-# # Modify get_plug_state to log the device info and not print it to the console
-# async def get_plug_state(retries=3, delay=2):
-#     attempt = 0
-#     while attempt < retries:
-#         try:
-#             client = ApiClient(tapo_username, tapo_password)
-#             device = await client.p100(ip_address)
-#             device_info = await device.get_device_info()
-
-#             # Log the device info instead of printing it to the console
-#             log_to_file(f"Device Info: {device_info}")
-
-#             # Return the actual state from device_info
-#             return device_info.device_on  # Adjust according to actual device_info structure
-#         except Exception as e:
-#             attempt += 1
-#             log_error(f"Error getting plug state (Attempt {attempt}/{retries}): {e}")
-#             if attempt < retries:
-#                 print_to_console(f"Retrying in {delay} seconds...")
-#                 await asyncio.sleep(delay)
-#             else:
-#                 log_error("Failed to get plug state after multiple attempts. Exiting program.")
-#                 return None
-
-# # Retry mechanism for the plug control
-# async def control_plug(action, retries=3, delay=2):
-#     attempt = 0
-#     while attempt < retries:
-#         try:
-#             client = ApiClient(tapo_username, tapo_password)
-#             device = await client.p100(ip_address)
-#             current_state = await get_plug_state()
-
-#             # Wait for 2 seconds before sending the command
-#             await asyncio.sleep(2)
-
-#             if action == "on" and not current_state:
-#                 await device.on()
-#                 print_to_console("Tapo P100 turned on (Battery low)")
-#                 log_to_file("Tapo P100 turned on (Battery low)")
-#             elif action == "off" and current_state:
-#                 await device.off()
-#                 print_to_console("Tapo P100 turned off (Battery good)")
-#                 log_to_file("Tapo P100 turned off (Battery good)")
-#             return  # Exit the function on success
-#         except Exception as e:
-#             attempt += 1
-#             log_error(f"Error controlling plug (Attempt {attempt}/{retries}): {e}")
-#             if attempt < retries:
-#                 print_to_console(f"Retrying in {delay} seconds...")
-#                 await asyncio.sleep(delay)
-#             else:
-#                 log_error("Failed to control plug after multiple attempts. Exiting program.")
-#                 return
-
 
 # Function to check the battery and decide on Tapo plug action
 async def check_battery_and_control_plug(config):

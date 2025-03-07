@@ -7,26 +7,7 @@ from email.mime.multipart import MIMEMultipart
 def log_to_file(log_file_path, message):
     with open(log_file_path, 'a') as log_file:
         log_file.write(f"{message}\n")
-
-def read_desktop_path(log_file_path):
-    try:
-        # Use absolute path to source_path.txt using USERPROFILE
-        user_profile = os.environ.get("USERPROFILE")
-        source_path_file = os.path.join(user_profile, 'Desktop', 'GAUTOCHARGER', 'source_path.txt')
-
-        # Read the desktop path from 'source_path.txt'
-        with open(source_path_file, 'r') as f:
-            desktop_path = f.read().strip()
-
-        # Check if the path is valid
-        if not desktop_path or not os.path.exists(desktop_path):
-            raise FileNotFoundError("Desktop path not found or invalid.")
-
-        return desktop_path
-    except Exception as e:
-        log_to_file(log_file_path, f"Error reading desktop path: {e}")
-        raise
-
+        
 # Function to read Gmail credentials from g_creds.config
 def read_gmail_credentials(config_path):
     credentials = {}
@@ -44,11 +25,12 @@ def send_email(subject, body, to_email):
     log_file_path = 'script_log.txt'
 
     try:
-        # Read desktop path from source_path.txt
-        desktop_path = read_desktop_path(log_file_path)
+        # Read log file path from current working directory
+        current_path = os.getcwd()  # Get the current working directory
+        log_path = os.path.join(current_path, log_file_path) 
 
         # Path to g_creds.config on the desktop
-        config_path = os.path.join(desktop_path, 'GAUTOCHARGER', 'g_creds.config')
+        config_path = os.path.join(current_path, 'g_creds.config')
 
         # Read Gmail credentials from config file
         gmail_user, app_password = read_gmail_credentials(config_path)

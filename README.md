@@ -62,19 +62,13 @@ pip install tapo psutil
 > Replace **username**, **password** and **ip_address** in the ```tapo_creds.config``` file with your tapo account and smartplug's IP
 
 ## Configuration
-- **tapo_creds.config**: Stores Tapo credentials (username, password) and static IP of the smart plug.
-- **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 3 minutes. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
-
-## Logging
-GAutoCharger-V3 logs battery levels and plug actions to a rotating log file located in the /logs/ directory. Logs are rotated daily, with each log file named ```script_log.txt.YYYYMMDDHHMMSS``` Old logs are automatically cleaned up after 7 days.
-
-## Retry Machanism
-The script has a built-in retry mechanism for temporary connection issues with the Tapo Smart Plug. If the plug state fails to fetch or control actions are unsuccessful due to network issues, the script retries 3  times before restarting itself.
+- **g_creds.config**: Stores the google app password for sending email.
+- **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 1 minute. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
 ## How It Works
 1. **Battery Monitoring**: The script uses the psutil library to monitor the laptop's battery percentage and charging status.
 2. **Smart Plug Control**: Based on the battery level thresholds, the script sends commands to the Tapo Smart Plug using the Tapo API to either turn ON or OFF the charging.
-3. **Logging**: Logs battery levels, plug states, and errors for debugging and tracking the system's behavior.
+3. **Logging**: Logs battery levels
 
 ## Future Improvements
 - More robust retry logic with exponential backoff for handling network failures.
@@ -100,6 +94,6 @@ The script has a built-in retry mechanism for temporary connection issues with t
 [@JDIYMPH](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA)
 
 ## Tech Stack
-- **Client:** Python Script, Unofficial Tapo API
-- **Server:** Tapo API
+- **Client:** Python Script
+- **Server:** IFTTT - Tapo Integration
 
