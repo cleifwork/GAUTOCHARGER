@@ -27,7 +27,6 @@ def send_email(subject, body, to_email):
     try:
         # Read log file path from current working directory
         current_path = os.getcwd()  # Get the current working directory
-        log_path = os.path.join(current_path, log_file_path) 
 
         # Path to g_creds.config on the desktop
         config_path = os.path.join(current_path, 'g_creds.config')
