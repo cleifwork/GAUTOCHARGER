@@ -2,7 +2,7 @@
 
 **GAutoCharger-V3** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
 
-## FEATURES
+### FEATURES
 - Automated Charging Control: Automatically turns on the smart plug when the battery level is low and turns it off when the battery is full, based on configurable thresholds.
 - Battery Level Monitoring: Logs battery levels and power status at regular intervals, providing full visibility into the device’s charging state.
 - Smart Plug Integration: Communicates with Tapo Smart Plug through the Tapo API, allowing remote control of the power outlet connected to your laptop’s charger.
@@ -10,7 +10,7 @@
 - Resilient Retry Mechanism: Built-in retry logic for handling temporary connection issues with the Tapo Smart Plug.
 - Configurable Parameters: Easy-to-set thresholds and other parameters in the ```battery_level.config``` file for quick configuration.
 
-## REQUIREMENTS
+### REQUIREMENTS
 - **Python 3.11+** The script requires Python to execute the automation logic.
 - **Python Libraries** (```psutil```)
 - **IFTTT Account:** To receive email triggers and automate power control.
@@ -19,7 +19,7 @@
 - **Google App Password** [Need to generate app password to allow email sending](https://myaccount.google.com/apppasswords) 
 
 
-## DEMO
+### DEMO
 - [GAutoCharger-V3 App Demo](https://www.youtube.com/watch?v=QEfLKXhg03o)
 - [GAutoCharger-V3 Installation & Configuration](https://www.youtube.com/watch?v=zHy7FS_HU7o)
 
@@ -82,12 +82,8 @@ pip install tapo psutil
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1Vro6VWORnAFdjA1cgl-9VerqrLVbPYu7)
 
 ## SUPPORT
-
-#### Join our FB Group
-[GConnect App (Omada Voucher Solution)](https://www.facebook.com/groups/1776872022780742) 
-  
-#### Or subcribe to our YouTube Channel
-[@JDIYMPH](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA)
+#### [Join our FB Group](https://www.facebook.com/groups/1776872022780742) 
+#### Or subcribe to our [YouTube](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA) Channel
 
 ## TECH STACK
 - **Client:** Python Script
