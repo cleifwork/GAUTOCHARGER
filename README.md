@@ -1,4 +1,4 @@
-# GAUTOCHARGER-V3 (SMTP): Laptop AutoCharging Solution
+# GAUTOCHARGER-V3: Laptop AutoCharging Solution
 > [!NOTE] 
 > _For Local Network & VPN Use_
 
