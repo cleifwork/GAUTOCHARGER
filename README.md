@@ -1,4 +1,4 @@
-# GAUTOCHARGER-V3: AutoCharging Solution
+# GAUTOCHARGER-V3 (SMTP): AutoCharging Solution - FOR VPN USE
 
 **GAutoCharger-V3** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
 
