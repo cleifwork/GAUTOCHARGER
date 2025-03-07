@@ -54,7 +54,14 @@ pip install tapo psutil
 
 - **[Create Tapo Account](https://www.youtube.com/watch?v=77Lt1sZykJg)**
 - **[Setup Tapo Smart Plug](https://www.youtube.com/watch?v=Mbzdlxxn3cw)** 
-- **[How to get Tapo Smart Plug's IP & MAC address then set to STATIC in your router](https://www.youtube.com/watch?v=lYJgfnz1bg0)**
+
+### 3. SHOULD HAVE IFTTT ACCOUNT
+- **[Signing Up for IFTTT Using Google Account on a Web Browser:](https://www.youtube.com/watch?v=dsIPK-fWXoc)**
+	- _[IFTTT Website](https://ifttt.com/explore)_
+
+- **Use these Published Applets:**
+	- [PCBatteryLOW](https://ift.tt/XJS4DhE)
+	- [PCBatteryGOOD](https://ift.tt/DkObnye)
 
 > [!IMPORTANT]
 > Add your **gmail** and **appass** in the ```g_creds.config``` file.
