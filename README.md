@@ -1,6 +1,6 @@
 # GAUTOCHARGER-V3 (SMTP): Laptop AutoCharging Solution
 > [!NOTE] 
-> For Local Network & VPN Use
+> _For Local Network & VPN Use_
 
 **GAutoCharger-V3** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
 
@@ -25,15 +25,15 @@
 - [GAutoCharger-V3 App Demo](https://www.youtube.com/watch?v=QEfLKXhg03o)
 - [GAutoCharger-V3 Installation & Configuration](https://www.youtube.com/watch?v=zHy7FS_HU7o)
 
-## AUTHOR(S)
+### AUTHOR(S)
 - [@cleifwork](https://www.github.com/cleifwork)
 
-## ENVIRONMENT VARIABLES
+### ENVIRONMENT VARIABLES
 To run this project, you will need to add your google app password in the `g_creds.config` file
 
-## INSTALLATION
+### INSTALLATION
 
-### 1. SHOULD HAVE A WINDOWS LAPTOP
+#### 1. SHOULD HAVE A WINDOWS LAPTOP
 > [!NOTE] 
 > Tested using Windows 10 and Windows 11
 
@@ -51,13 +51,13 @@ pip install tapo psutil
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
 
-### 2. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG
+#### 2. SHOULD HAVE TAPO ACCOUNT & SMARTPLUG
 > Creating a Tapo Account and Setting Up Your Tapo Smart Plug
 
 - **[Create Tapo Account](https://www.youtube.com/watch?v=77Lt1sZykJg)**
 - **[Setup Tapo Smart Plug](https://www.youtube.com/watch?v=Mbzdlxxn3cw)** 
 
-### 3. SHOULD HAVE IFTTT ACCOUNT
+#### 3. SHOULD HAVE IFTTT ACCOUNT
 - **[Signing Up for IFTTT Using Google Account on a Web Browser:](https://www.youtube.com/watch?v=dsIPK-fWXoc)**
 	- _[IFTTT Website](https://ifttt.com/explore)_
 
@@ -68,31 +68,31 @@ pip install tapo psutil
 > [!IMPORTANT]
 > Add your **gmail** and **appass** in the ```g_creds.config``` file.
 
-## CONFIGURATION
+### CONFIGURATION
 - **g_creds.config**: Stores the google app password for sending email.
 - **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 1 minute. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
-## HOW IT WORKS
+### HOW IT WORKS
 1. **Battery Monitoring**: The script uses the psutil library to monitor the laptop's battery percentage and charging status.
 2. **Smart Plug Control**: Based on the battery level thresholds, the script sends commands to the Tapo Smart Plug using the Tapo API to either turn ON or OFF the charging.
 3. **Logging**: Logs battery levels
 
-## FUTURE IMPROVEMENTS
+### FUTURE IMPROVEMENTS
 - Add optimizations here...
 
-## RUNNING TESTS
+### RUNNING TESTS
 - Launch ```run_gautocharger.bat``` inside GAUTOCHARGER folder
 
-## OPTIMIZATIONS
+### OPTIMIZATIONS
 - Customizable battery thresholds and plug control frequency via a configuration file.
 
-## SCREENSHOTS
+### SCREENSHOTS
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1Vro6VWORnAFdjA1cgl-9VerqrLVbPYu7)
 
-## SUPPORT
+### SUPPORT
 #### Join our [FB Group](https://www.facebook.com/groups/1776872022780742) Or subscribe to our [YouTube](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA) Channel
 
-## TECH STACK
+### TECH STACK
 - **Client:** Python Script
 - **Server:** IFTTT - Tapo Integration
 
