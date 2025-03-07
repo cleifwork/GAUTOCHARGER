@@ -18,7 +18,7 @@
 - **IFTTT Account:** To receive email triggers and automate power control.
 - **Tapo Account:** Required to manage your Tapo Smart Plugs.
 - **Tapo Smart Plug:** Compatible models include P100, P105, etc.
-- **Google App Password** [Need to generate app password to allow email sending](https://myaccount.google.com/apppasswords) 
+- [**Google App Password**](https://myaccount.google.com/apppasswords) To allow email sending in python.
 
 
 ### DEMO
