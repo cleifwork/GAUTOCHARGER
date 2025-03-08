@@ -71,7 +71,7 @@ pip install tapo psutil
 
 ## How It Works?
 1. **Battery Monitoring:** The script uses the psutil library to monitor the laptop's battery percentage and charging status.
-2. **Good App Password:** Allows the python script to send SMTP email to IFTTT
+2. **Google App Password:** Allows the python script to send SMTP email to IFTTT
 3. **IFTTT-Tapo Integration:** Triggers the Tapo Smartplug (ON & OFF)
 2. **Smart Plug Control:** Based on the battery level thresholds, the python script sends email to IFTTT to either turn ON or OFF the Tapo Smart Plug using their integration .
 3. **Logging:** Logs battery levels
