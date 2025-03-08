@@ -66,7 +66,7 @@ def read_gmail_credentials(config_path):
 
 # Function to send email
 def send_email(subject, body, to_email):
-    log_msg_success = "Email sent successfully to "
+    log_msg_success = "Email sent successfully to IFTTT"
     log_msg_error = "Error sending email: "
     log_msg_unexpected_error = "An unexpected error occurred: "
 
@@ -99,7 +99,7 @@ def send_email(subject, body, to_email):
             server.quit()
 
             # Log success
-            logger.info(f"{log_msg_success} IFTTT")
+            logger.info(log_msg_success)
         except Exception as e:
             # Log SMTP-related errors
             logger.error(f"{log_msg_error}{e}")
