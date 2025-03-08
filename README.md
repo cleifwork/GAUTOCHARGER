@@ -5,21 +5,18 @@
 **GAutoCharger-V3** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
 
 ## Features
-- Automated Charging Control: Automatically turns on the smart plug when the battery level is low and turns it off when the battery is full, based on configurable thresholds.
-- Battery Level Monitoring: Logs battery levels and power status at regular intervals, providing full visibility into the device’s charging state.
-- Google App Password: Allows the python script to send email to IFTTT
-- IFTTT-Tapo Smart Plug Integration: IFTTT communicates with Tapo Smart Plug through integration
-- Daily Log Rotation: Generates daily logs stored in the ```/logs/``` directory with automatic log rotation, ensuring minimal maintenance and easy tracking of battery status.
-- Configurable Parameters: Easy-to-set thresholds and other parameters in the ```battery_level.config``` file for quick configuration.
+- **Automated Charging Control:** Automatically turns on the smart plug when the battery level is low and turns it off when the battery is full, based on configurable thresholds.
+- **Battery Level Monitoring:** Logs battery levels and power status at regular intervals, providing full visibility into the device’s charging state.
+- **Daily Log Rotation:** Generates daily logs stored in the ```/logs/``` directory with automatic log rotation, ensuring minimal maintenance and easy tracking of battery status.
+- **Configurable Parameters:** Easy-to-set thresholds and other parameters in the ```battery_level.config``` file for quick configuration.
 
 ## Requirements
 - **Python 3.11+** The script requires Python to execute the automation logic.
 - **Python Libraries** (```psutil```)
 - **IFTTT Account:** To receive email triggers and automate power control.
-- **Tapo Account:** Required to manage your Tapo Smart Plugs.
+- **Tapo Account:** With IFTTT integration, required to manage your Tapo Smart Plugs.
 - **Tapo Smart Plug:** Compatible models include P100, P105, etc.
 - **Google App Password:** To allow email sending in python.
-
 
 ## Demo
 - [GAutoCharger-V3 App Demo](https://www.youtube.com/watch?v=QEfLKXhg03o)
@@ -32,7 +29,6 @@
 To run this project, you need to generate and add your [google app password](https://myaccount.google.com/apppasswords) in the `g_creds.config` file
 
 ## Installation
-
 ### 1. SHOULD HAVE A WINDOWS LAPTOP
 > [!NOTE] 
 > Tested using Windows 10 and Windows 11
