@@ -7,9 +7,9 @@
 ## Features
 - Automated Charging Control: Automatically turns on the smart plug when the battery level is low and turns it off when the battery is full, based on configurable thresholds.
 - Battery Level Monitoring: Logs battery levels and power status at regular intervals, providing full visibility into the device’s charging state.
-- Smart Plug Integration: Communicates with Tapo Smart Plug through the Tapo API, allowing remote control of the power outlet connected to your laptop’s charger.
+- Google App Password: Allows the python script to send email to IFTTT
+- IFTTT-Tapo Smart Plug Integration: IFTTT communicates with Tapo Smart Plug through integration
 - Daily Log Rotation: Generates daily logs stored in the ```/logs/``` directory with automatic log rotation, ensuring minimal maintenance and easy tracking of battery status.
-- Resilient Retry Mechanism: Built-in retry logic for handling temporary connection issues with the Tapo Smart Plug.
 - Configurable Parameters: Easy-to-set thresholds and other parameters in the ```battery_level.config``` file for quick configuration.
 
 ## Requirements
@@ -18,7 +18,7 @@
 - **IFTTT Account:** To receive email triggers and automate power control.
 - **Tapo Account:** Required to manage your Tapo Smart Plugs.
 - **Tapo Smart Plug:** Compatible models include P100, P105, etc.
-- [**Google App Password**](https://myaccount.google.com/apppasswords) To allow email sending in python.
+- **Google App Password:** To allow email sending in python.
 
 
 ## Demo
@@ -29,7 +29,7 @@
 - [@cleifwork](https://www.github.com/cleifwork)
 
 ## Environment Variables
-To run this project, you will need to add your google app password in the `g_creds.config` file
+To run this project, you need to generate and add your [google app password](https://myaccount.google.com/apppasswords) in the `g_creds.config` file
 
 ## Installation
 
@@ -66,16 +66,16 @@ pip install tapo psutil
 	- [PCBatteryGOOD](https://ift.tt/DkObnye)
 
 > [!IMPORTANT]
-> Add your **gmail** and **appass** in the ```g_creds.config``` file.
+> Add your **gmail** and **appass (app password)** in the ```g_creds.config``` file.
 
 ## Configuration
-- **g_creds.config**: Stores the google app password for sending email.
-- **Battery Control Logic**: The script monitors battery levels every 20 seconds and performs charging control every 1 minute. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
+- **g_creds.config:** Stores the google app password for sending email.
+- **Battery Control Logic:** The script monitors battery levels every 20 seconds and performs charging control every 1 minute. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
 ## How It Works?
-1. **Battery Monitoring**: The script uses the psutil library to monitor the laptop's battery percentage and charging status.
-2. **Smart Plug Control**: Based on the battery level thresholds, the script sends commands to the Tapo Smart Plug using the Tapo API to either turn ON or OFF the charging.
-3. **Logging**: Logs battery levels
+1. **Battery Monitoring:** The script uses the psutil library to monitor the laptop's battery percentage and charging status.
+2. **Smart Plug Control:** Based on the battery level thresholds, the script sends commands to the Tapo Smart Plug using the Tapo API to either turn ON or OFF the charging.
+3. **Logging:** Logs battery levels
 
 ## Future Improvements
 - Add optimizations here...
@@ -84,7 +84,7 @@ pip install tapo psutil
 - Launch ```run_gautocharger.bat``` inside GAUTOCHARGER folder
 
 ## Optimizations
-- Customizable battery thresholds and plug control frequency via a configuration file.
+- Customizable battery thresholds and plug control frequency via ```g_creds.config``` file.
 
 ## Screenshots
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1Vro6VWORnAFdjA1cgl-9VerqrLVbPYu7)
