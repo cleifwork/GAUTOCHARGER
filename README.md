@@ -1,6 +1,6 @@
 # GAUTOCHARGER-V3: Laptop AutoCharging Solution
 > [!NOTE] 
-> _For Local Network & VPN Use_
+> _For Local Network & VPN Use (Internet Required)_
 
 **GAutoCharger-V3** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
 
@@ -9,6 +9,7 @@
 - **Battery Level Monitoring:** Logs battery levels and power status at regular intervals, providing full visibility into the device’s charging state.
 - **Daily Log Rotation:** Generates daily logs stored in the ```/logs/``` directory with automatic log rotation, ensuring minimal maintenance and easy tracking of battery status.
 - **Configurable Parameters:** Easy-to-set thresholds and other parameters in the ```battery_level.config``` file for quick configuration.
+- **Works with VPN:** Unlike V2 this version works even if you are connected to VPN.
 
 ## Requirements
 - **Python 3.11+** The script requires Python to execute the automation logic.
@@ -70,7 +71,9 @@ pip install tapo psutil
 
 ## How It Works?
 1. **Battery Monitoring:** The script uses the psutil library to monitor the laptop's battery percentage and charging status.
-2. **Smart Plug Control:** Based on the battery level thresholds, the script sends commands to the Tapo Smart Plug using the Tapo API to either turn ON or OFF the charging.
+2. **Good App Password:** Allows the python script to send SMTP email to IFTTT
+3. **IFTTT-Tapo Integration:** Triggers the Tapo Smartplug (ON & OFF)
+2. **Smart Plug Control:** Based on the battery level thresholds, the python script sends email to IFTTT to either turn ON or OFF the Tapo Smart Plug using their integration .
 3. **Logging:** Logs battery levels
 
 ## Future Improvements
