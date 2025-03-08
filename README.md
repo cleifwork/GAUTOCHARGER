@@ -1,6 +1,6 @@
 # GAUTOCHARGER-V2: Laptop AutoCharging Solution
 > [!NOTE] 
-> _For Local Network Use_
+> _For Local Network Use (No Internet Required)_
 
 **GAutoCharger-V2** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
 
