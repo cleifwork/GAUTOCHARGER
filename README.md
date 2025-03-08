@@ -77,13 +77,15 @@ pip install tapo psutil
 3. **Logging:** Logs battery levels
 
 ## Future Improvements
-- Add optimizations here...
+- Add future improvements here...
 
 ## Running Tests
 - Launch ```run_gautocharger.bat``` inside GAUTOCHARGER folder
 
 ## Optimizations
 - Customizable battery thresholds and plug control frequency via ```g_creds.config``` file.
+- Merges the AutoMailSMTP and GAutoCharger scripts to make the solution to work with VPN users.
+- Optimized the logging for both console and file logging using the logging handler library.
 
 ## Screenshots
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1Vro6VWORnAFdjA1cgl-9VerqrLVbPYu7)
