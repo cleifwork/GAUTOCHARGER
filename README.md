@@ -12,8 +12,8 @@
 - **Works with VPN:** Unlike V2 this version works even if you are connected to VPN.
 
 ## Requirements
-- **Python 3.11+** The script requires Python to execute the automation logic.
-- **Python Libraries** (```psutil```)
+- **Python 3.11+:** Required to run the script.
+- **Python Libraries:** (```psutil```)
 - **IFTTT Account:** To receive email triggers and automate power control.
 - **Tapo Account:** With IFTTT integration, required to manage your Tapo Smart Plugs.
 - **Tapo Smart Plug:** Compatible models include P100, P105, etc.
