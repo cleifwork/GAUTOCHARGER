@@ -148,8 +148,10 @@ async def check_battery_and_control_plug(config):
             logger.info(log_message)
 
             if percent <= config['battery_level_ON'] and not plugged:
+                logger.info("Laptop Charger --> Turning ON...")  # Log message
                 send_email("#PCBatteryLOW", "", "trigger@applet.ifttt.com")
             elif percent >= config['battery_level_OFF'] and plugged:
+                logger.info("Laptop Charger --> Turning OFF...")  # Log message
                 send_email("#PCBatteryGOOD", "", "trigger@applet.ifttt.com")
         else:
             log_error("Battery information not available.")
