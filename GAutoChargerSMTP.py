@@ -99,7 +99,7 @@ def send_email(subject, body, to_email):
             server.quit()
 
             # Log success
-            logger.info(f"{log_msg_success}{to_email}")
+            logger.info(f"{log_msg_success} IFTTT")
         except Exception as e:
             # Log SMTP-related errors
             logger.error(f"{log_msg_error}{e}")
