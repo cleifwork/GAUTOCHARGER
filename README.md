@@ -84,7 +84,7 @@ pip install tapo psutil
 
 ## Optimizations
 - Customizable battery thresholds and plug control frequency via ```g_creds.config``` file.
-- Merges the AutoMailSMTP and GAutoCharger scripts to make the solution to work with VPN users.
+- Merges the AutoMailSMTP and GAutoCharger scripts to make the solution work with VPN users.
 - Optimized the logging for both console and file logging using the logging handler library.
 
 ## Screenshots
