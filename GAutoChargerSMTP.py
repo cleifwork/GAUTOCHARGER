@@ -106,12 +106,18 @@ def send_email(subject, body, to_email):
     except Exception as e:
         # Log unexpected errors
         logger.critical(f"{log_msg_unexpected_error}{e}")
-
+        
 # Function to read configuration
 def read_config(file_path):
+    # Default configuration values
     default_config = {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 60}
 
+    # Ideal ranges for battery levels
+    ideal_battery_low_range = (10, 50)  # Ideal range for battery_level_ON
+    ideal_battery_good_range = (51, 100)  # Ideal range for battery_level_OFF
+
     try:
+        # Parse the configuration file
         with open(file_path, 'r') as file:
             config = {
                 key: int(value)
@@ -129,11 +135,23 @@ def read_config(file_path):
         log_error(f"Unexpected error while reading '{file_path}': {e}. Using default values.")
         return default_config
 
-    missing_keys = [key for key in default_config if key not in config]
-    if missing_keys:
-        log_error(f"Missing required configuration keys {missing_keys} in {file_path}. Using default values.")
-        return default_config
+    # Validate `battery_level_ON` range
+    if not (ideal_battery_low_range[0] <= config['battery_level_ON'] <= ideal_battery_low_range[1]):
+        log_error(f"'battery_level_ON' ({config['battery_level_ON']}) must be between {ideal_battery_low_range[0]} and {ideal_battery_low_range[1]}. Default value {default_config['battery_level_ON']} will be used.")
+        config['battery_level_ON'] = default_config['battery_level_ON']
 
+    # Validate `battery_level_OFF` range
+    if not (ideal_battery_good_range[0] <= config['battery_level_OFF'] <= ideal_battery_good_range[1]):
+        log_error(f"'battery_level_OFF' ({config['battery_level_OFF']}) must be between {ideal_battery_good_range[0]} and {ideal_battery_good_range[1]}. Default value {default_config['battery_level_OFF']} will be used.")
+        config['battery_level_OFF'] = default_config['battery_level_OFF']
+
+    # Validate logical relationship between `battery_level_ON` and `battery_level_OFF`
+    if config['battery_level_ON'] >= config['battery_level_OFF']:
+        log_error(f"'battery_level_ON' ({config['battery_level_ON']}) cannot be greater than or equal to 'battery_level_OFF' ({config['battery_level_OFF']}). Default values will be used.")
+        config['battery_level_ON'] = default_config['battery_level_ON']
+        config['battery_level_OFF'] = default_config['battery_level_OFF']
+
+    # Return validated configuration
     return config
 
 # Function to check the battery and decide on Tapo plug action
