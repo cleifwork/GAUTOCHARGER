@@ -66,7 +66,7 @@ def read_gmail_credentials(config_path):
 
 # Function to send email
 def send_email(subject, body, to_email):
-    log_msg_success = "Email sent successfully to IFTTT"
+    # log_msg_success = "Email sent successfully to IFTTT"
     log_msg_error = "Error sending email: "
     log_msg_unexpected_error = "An unexpected error occurred: "
 
@@ -99,7 +99,7 @@ def send_email(subject, body, to_email):
             server.quit()
 
             # Log success
-            logger.info(log_msg_success)
+            # logger.info(log_msg_success)
         except Exception as e:
             # Log SMTP-related errors
             logger.error(f"{log_msg_error}{e}")
@@ -146,13 +146,23 @@ async def check_battery_and_control_plug(config):
 
             log_message = f"Battery Level: {percent}% - Plugged In: {plugged}"
             logger.info(log_message)
-
+            
+            # Condition for turning ON charger
             if percent <= config['battery_level_ON'] and not plugged:
-                logger.info("Laptop Charger --> Turning ON...")  # Log message
-                send_email("#PCBatteryLOW", "", "trigger@applet.ifttt.com")
+                try:
+                    send_email("#PCBatteryLOW", "", "trigger@applet.ifttt.com")
+                    logger.info("Laptop Charger --> Turning ON...")  # Log message
+                except Exception as e:
+                    logger.error(f"Failed to send email for turning ON charger: {e}")
+
+            # Condition for turning OFF charger
             elif percent >= config['battery_level_OFF'] and plugged:
-                logger.info("Laptop Charger --> Turning OFF...")  # Log message
-                send_email("#PCBatteryGOOD", "", "trigger@applet.ifttt.com")
+                try:
+                    send_email("#PCBatteryGOOD", "", "trigger@applet.ifttt.com")
+                    logger.info("Laptop Charger --> Turning OFF...")  # Log message
+                except Exception as e:
+                    logger.error(f"Failed to send email for turning OFF charger: {e}")
+
         else:
             log_error("Battery information not available.")
     except Exception as e:
