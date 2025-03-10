@@ -63,13 +63,8 @@ def read_gmail_credentials(config_path):
     except Exception as e:
         logger.error(f"Error reading credentials from {config_path}: {e}")
         raise
-
-# Function to send email
+        
 def send_email(subject, body, to_email):
-    # log_msg_success = "Email sent successfully to IFTTT"
-    log_msg_error = "Error sending email: "
-    log_msg_unexpected_error = "An unexpected error occurred: "
-
     try:
         # Path to g_creds.config in the current working directory
         config_path = os.path.join(os.getcwd(), 'g_creds.config')
@@ -88,24 +83,21 @@ def send_email(subject, body, to_email):
         message['Subject'] = subject
         message.attach(MIMEText(body, 'plain'))
 
-        try:
-            # Connect to Gmail's SMTP server
-            server = smtplib.SMTP(smtp_server, smtp_port)
-            server.ehlo()
-            server.starttls()
-            server.ehlo()
-            server.login(gmail_user, app_password)
-            server.sendmail(gmail_user, to_email, message.as_string())
-            server.quit()
+        # Connect to Gmail's SMTP server
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
+        server.login(gmail_user, app_password)
+        server.sendmail(gmail_user, to_email, message.as_string())
+        server.quit()
 
-            # Log success
-            # logger.info(log_msg_success)
-        except Exception as e:
-            # Log SMTP-related errors
-            logger.error(f"{log_msg_error}{e}")
+        logger.info(f"Email sent successfully to {to_email}")
+        return True  # Email sent successfully
+
     except Exception as e:
-        # Log unexpected errors
-        logger.critical(f"{log_msg_unexpected_error}{e}")
+        logger.error(f"Error sending email: {e}")
+        return False  # Email failed to send
         
 # Function to read configuration
 def read_config(file_path):
@@ -154,7 +146,6 @@ def read_config(file_path):
     # Return validated configuration
     return config
 
-# Function to check the battery and decide on Tapo plug action
 async def check_battery_and_control_plug(config):
     try:
         battery = psutil.sensors_battery()
@@ -167,19 +158,13 @@ async def check_battery_and_control_plug(config):
             
             # Condition for turning ON charger
             if percent <= config['battery_level_ON'] and not plugged:
-                try:
-                    send_email("#PCBatteryLOW", "", "trigger@applet.ifttt.com")
-                    logger.info("Laptop Charger --> Turning ON...")  # Log message
-                except Exception as e:
-                    logger.error(f"Failed to send email for turning ON charger: {e}")
+                if send_email("#PCBatteryLOW", "", "trigger@applet.ifttt.com"):
+                    logger.info("Laptop Charger --> Turning ON...")  # Only log if email was sent successfully
 
             # Condition for turning OFF charger
             elif percent >= config['battery_level_OFF'] and plugged:
-                try:
-                    send_email("#PCBatteryGOOD", "", "trigger@applet.ifttt.com")
-                    logger.info("Laptop Charger --> Turning OFF...")  # Log message
-                except Exception as e:
-                    logger.error(f"Failed to send email for turning OFF charger: {e}")
+                if send_email("#PCBatteryGOOD", "", "trigger@applet.ifttt.com"):
+                    logger.info("Laptop Charger --> Turning OFF...")  # Only log if email was sent successfully
 
         else:
             log_error("Battery information not available.")
