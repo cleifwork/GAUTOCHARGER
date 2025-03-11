@@ -11,13 +11,21 @@
 - **Configurable Parameters:** Easy-to-set thresholds and other parameters in the ```battery_level.config``` file for quick configuration.
 - **Works with VPN:** Unlike V2 this version works even if you are connected to VPN.
 
-## Requirements
+## Requirements (SMTP)
 - **Python 3.11+:** Required to run the script.
 - **Python Libraries:** (```psutil```)
 - **IFTTT Account:** To receive email triggers and automate power control.
 - **Tapo Account:** With IFTTT integration, required to manage your Tapo Smart Plugs.
 - **Tapo Smart Plug:** Compatible models include P100, P105, etc.
 - **Google App Password:** To allow email sending in python.
+
+## Requirements (OAuth2)
+- **Python 3.11+:** Required to run the script.
+- **Python Libraries:** (```psutil```)
+- **IFTTT Account:** To receive email triggers and automate power control.
+- **Tapo Account:** With IFTTT integration, required to manage your Tapo Smart Plugs.
+- **Tapo Smart Plug:** Compatible models include P100, P105, etc.
+- **Google OAuth 2.0:** To allow email sending in python in a more secure way.
 
 ## Demo
 - [GAutoCharger-V3 App Demo](https://www.youtube.com/watch?v=QEfLKXhg03o)
@@ -27,7 +35,11 @@
 - [@cleifwork](https://www.github.com/cleifwork)
 
 ## Environment Variables
-To run this project, you need to generate and add your [google app password](https://myaccount.google.com/apppasswords) in the `g_creds.config` file
+#### FOR SMTP
+	- To run this project, you need to generate and add your [google app password](https://myaccount.google.com/apppasswords) in the `g_creds.config` file
+
+#### FOR OAuth2
+	- To run this project, you need to generate `credentials.json` from your [Google Cloud Console](https://console.cloud.google.com/)
 
 ## Installation
 ### 1. SHOULD HAVE A WINDOWS LAPTOP
@@ -63,18 +75,31 @@ pip install tapo psutil
 	- [PCBatteryGOOD](https://ift.tt/DkObnye)
 
 > [!IMPORTANT]
-> Add your **gmail** and **appass (app password)** in the ```g_creds.config``` file.
+> **FOR SMTP:** Add your **gmail** and **appass (app password)** in the ```g_creds.config``` file.
+
+> [!IMPORTANT]
+> **FOR OATH2:** Add your **credentials.json** file in the GAUTOCHARGER root folder.
 
 ## Configuration
 - **g_creds.config:** Stores the google app password for sending email.
+- **credentials.json** Generates token serves as credentials for sending email.
 - **Battery Control Logic:** The script monitors battery levels every 20 seconds and performs charging control every 1 minute. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
 ## How It Works?
+#### FOR SMTP
 1. **Battery Monitoring:** The script uses the psutil library to monitor the laptop's battery percentage and charging status.
 2. **Google App Password:** Allows the python script to send SMTP email to IFTTT
 3. **IFTTT-Tapo Integration:** Triggers the Tapo Smartplug (ON & OFF)
 2. **Smart Plug Control:** Based on the battery level thresholds, the python script sends email to IFTTT to either turn ON or OFF the Tapo Smart Plug using their integration .
 3. **Logging:** Logs battery levels
+
+#### FOR OATH2
+1. **Battery Monitoring:** The script uses the psutil library to monitor the laptop's battery percentage and charging status.
+2. **OAuth2.0 credentials.json:** Allows the python script to send a more secure email to IFTTT
+3. **IFTTT-Tapo Integration:** Triggers the Tapo Smartplug (ON & OFF)
+2. **Smart Plug Control:** Based on the battery level thresholds, the python script sends email to IFTTT to either turn ON or OFF the Tapo Smart Plug using their integration .
+3. **Logging:** Logs battery levels
+
 
 ## Future Improvements
 - Add future improvements here...
@@ -86,6 +111,7 @@ pip install tapo psutil
 - Customizable battery thresholds and plug control frequency via ```g_creds.config``` file.
 - Merges the AutoMailSMTP and GAutoCharger scripts to make the solution work with VPN users.
 - Optimized the logging for both console and file logging using the logging handler library.
+- Added another script that uses OAuth2.0 approach 
 
 ## Screenshots
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1Vro6VWORnAFdjA1cgl-9VerqrLVbPYu7)
