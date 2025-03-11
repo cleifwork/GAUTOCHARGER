@@ -105,7 +105,9 @@ pip install tapo psutil
 - Add future improvements here...
 
 ## Running Tests
-- Launch ```run_gautocharger.bat``` inside GAUTOCHARGER folder
+- **FOR SMTP:** Launch ```run_g2chargesmtp.bat``` inside GAUTOCHARGER folder
+- **FOR OAuth2:** Launch ```run_g2chargeoauth.bat``` inside GAUTOCHARGER folder
+
 
 ## Optimizations
 - Customizable battery thresholds and plug control frequency via ```g_creds.config``` file.
