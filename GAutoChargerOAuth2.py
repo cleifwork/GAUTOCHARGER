@@ -8,6 +8,7 @@ from logging.handlers import TimedRotatingFileHandler
 from email.mime.text import MIMEText
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 
 # Ensure the logs directory exists
@@ -30,22 +31,33 @@ console_handler.setFormatter(console_formatter)
 
 # Configure the root logger
 logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)  # Log everything to the file
 
 # Clear existing handlers to avoid duplicate logs
 if logger.hasHandlers():
     logger.handlers.clear()
-    
+
 # Add handlers
-logger.addHandler(file_handler)   # Log everything to the file
-logger.addHandler(console_handler)  # Log only INFO and above to the console
+logger.addHandler(file_handler)  # Log everything to the file
+logger.addHandler(console_handler)  # Log customized messages to the console
 
 # Set different log levels for file and console
-logger.setLevel(logging.DEBUG)  # Log everything to file
-console_handler.setLevel(logging.INFO)  # Only show INFO+ logs in console
+console_handler.setLevel(logging.INFO)  # Only show INFO+ messages directly
 
-# Suppress DEBUG logs from external libraries (googleapiclient, urllib3, etc.)
-logging.getLogger("googleapiclient").setLevel(logging.WARNING)
-logging.getLogger("urllib3").setLevel(logging.WARNING)
+# Custom filter to replace logs with hints in console but keep full logs in file
+class ConsoleFilter(logging.Filter):
+    def filter(self, record):
+        if record.levelno == logging.DEBUG:
+            record.msg = "DEBUG Log Found (See log file for details)"  
+        elif record.levelno == logging.WARNING:
+            record.msg = "WARNING Log Found (See log file for details)"  
+        elif record.levelno == logging.ERROR:
+            record.msg = "ERROR Log Found (See log file for details)"  
+        elif record.levelno == logging.CRITICAL:
+            record.msg = "CRITICAL Log Found (See log file for details)"  
+        return True
+
+console_handler.addFilter(ConsoleFilter())  # Apply filter only to console logs
 
 
 # Utility functions for logging
@@ -58,14 +70,13 @@ def log_error(message):
 
 # Gmail API setup
 SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
-
-
+  
 def get_gmail_service():
-    """Authenticate and return a Gmail API service instance."""
+    """Authenticate and return a Gmail API service instance with proper token refreshing."""
     creds = None
     token_path = "token.json"  # Path for storing the OAuth token
 
-    # Load existing credentials
+    # Load existing credentials if available
     if os.path.exists(token_path):
         creds = Credentials.from_authorized_user_file(token_path, SCOPES)
 
@@ -74,17 +85,20 @@ def get_gmail_service():
         if creds and creds.expired and creds.refresh_token:
             try:
                 creds.refresh(Request())  # Refresh token if expired
+                with open(token_path, "w") as token:
+                    token.write(creds.to_json())  # Save updated token
             except Exception as e:
                 logging.error(f"Token refresh failed: {e}. Re-authenticating...")
-                creds = None  # Force re-authentication
-        if not creds:
+                creds = None  # Force re-authentication if refresh fails
+                
+        if not creds:  # If token refresh fails or credentials are missing
             flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
             creds = flow.run_local_server(port=0)
             with open(token_path, "w") as token:
-                token.write(creds.to_json())
+                token.write(creds.to_json())  # Always save new token
 
     return build("gmail", "v1", credentials=creds)
-
+  
 
 def send_email(subject, body, to_email):
     """Send an email using Gmail API."""
@@ -207,7 +221,6 @@ async def main():
                 log_error(f"Error printing battery status: {e}")
 
         await asyncio.sleep(1)
-
 
 if __name__ == "__main__":
     asyncio.run(main())
