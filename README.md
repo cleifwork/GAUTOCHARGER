@@ -35,11 +35,11 @@
 - [@cleifwork](https://www.github.com/cleifwork)
 
 ## Environment Variables
-#### FOR SMTP
-	- To run this project, you need to generate and add your [google app password](https://myaccount.google.com/apppasswords) in the `g_creds.config` file
+### FOR SMTP
+- To run this project, you need to generate and add your [google app password](https://myaccount.google.com/apppasswords) in the `g_creds.config` file
 
-#### FOR OAuth2
-	- To run this project, you need to generate `credentials.json` from your [Google Cloud Console](https://console.cloud.google.com/)
+### FOR OAuth2
+- To run this project, you need to generate `credentials.json` from your [Google Cloud Console](https://console.cloud.google.com/)
 
 ## Installation
 ### 1. SHOULD HAVE A WINDOWS LAPTOP
