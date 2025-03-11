@@ -93,7 +93,7 @@ def get_gmail_service():
                 
         if not creds:  # If token refresh fails or credentials are missing
             flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
-            creds = flow.run_local_server(port=0)
+            creds = flow.run_local_server(port=0, access_type="offline", prompt="consent") # Ensures refresh token doesn't expire
             with open(token_path, "w") as token:
                 token.write(creds.to_json())  # Always save new token
 
