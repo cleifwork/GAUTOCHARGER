@@ -33,32 +33,54 @@ def log_to_file(message):
 def log_error(message):
     logging.error(message)
 
+      
+# Function to read configuration
 def read_config(file_path):
-    config = {}
+    # Default configuration values
+    default_config = {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 60}
+
+    # Ideal ranges for battery levels
+    ideal_battery_low_range = (10, 50)  # Ideal range for battery_level_ON
+    ideal_battery_good_range = (51, 100)  # Ideal range for battery_level_OFF
+
     try:
+        # Parse the configuration file
         with open(file_path, 'r') as file:
-            for line in file:
-                if '=' in line:
-                    key, value = line.strip().split('=', 1)
-                    config[key] = int(value)  # Ensure the values are integers
+            config = {
+                key: int(value)
+                for line in file
+                if '=' in line
+                for key, value in [line.strip().split('=', 1)]
+            }
     except FileNotFoundError:
         log_error(f"Config file '{file_path}' not found. Using default values.")
-        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+        return default_config
     except ValueError as e:
-        log_error(f"Error parsing values in '{file_path}': {e}. Ensure all values are valid integers. Using default values.")
-        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+        log_error(f"Error parsing values in '{file_path}': {e}. Using default values.")
+        return default_config
     except Exception as e:
         log_error(f"Unexpected error while reading '{file_path}': {e}. Using default values.")
-        return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
+        return default_config
 
-    # Ensure all required config values are present
-    required_keys = ['battery_level_ON', 'battery_level_OFF', 'plug_control_frequency']
-    for key in required_keys:
-        if key not in config:
-            log_error(f"Missing required configuration '{key}' in {file_path}. Using default values.")
-            return {'battery_level_ON': 20, 'battery_level_OFF': 90, 'plug_control_frequency': 180}
-    
+    # Validate `battery_level_ON` range
+    if not (ideal_battery_low_range[0] <= config['battery_level_ON'] <= ideal_battery_low_range[1]):
+        log_error(f"'battery_level_ON' ({config['battery_level_ON']}) must be between {ideal_battery_low_range[0]} and {ideal_battery_low_range[1]}. Default value {default_config['battery_level_ON']} will be used.")
+        config['battery_level_ON'] = default_config['battery_level_ON']
+
+    # Validate `battery_level_OFF` range
+    if not (ideal_battery_good_range[0] <= config['battery_level_OFF'] <= ideal_battery_good_range[1]):
+        log_error(f"'battery_level_OFF' ({config['battery_level_OFF']}) must be between {ideal_battery_good_range[0]} and {ideal_battery_good_range[1]}. Default value {default_config['battery_level_OFF']} will be used.")
+        config['battery_level_OFF'] = default_config['battery_level_OFF']
+
+    # Validate logical relationship between `battery_level_ON` and `battery_level_OFF`
+    if config['battery_level_ON'] >= config['battery_level_OFF']:
+        log_error(f"'battery_level_ON' ({config['battery_level_ON']}) cannot be greater than or equal to 'battery_level_OFF' ({config['battery_level_OFF']}). Default values will be used.")
+        config['battery_level_ON'] = default_config['battery_level_ON']
+        config['battery_level_OFF'] = default_config['battery_level_OFF']
+
+    # Return validated configuration
     return config
+
 
 # Read credentials from the text file
 def read_credentials(file_path):
@@ -123,12 +145,12 @@ async def control_plug(action, retries=3, delay=2):
 
             if action == "on" and not current_state:
                 await device.on()
-                print_to_console("Tapo P100 turned on (Battery low)")
+                print_to_console("Tapo P100 turned on (Battery LOW)")
                 log_to_file("Tapo P100 turned on (Battery low)")
             elif action == "off" and current_state:
                 await device.off()
                 print_to_console("Tapo P100 turned off (Battery good)")
-                log_to_file("Tapo P100 turned off (Battery good)")
+                log_to_file("Tapo P100 turned off (Battery GOOD)")
             return  # Exit the function on success
         except Exception as e:
             attempt += 1
