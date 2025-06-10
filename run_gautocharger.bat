@@ -7,7 +7,7 @@ REM Check if the GAUTOCHARGER folder exists on the default Desktop
 echo Checking Default Desktop: %DefaultDesktopPath%\GAUTOCHARGER
 if exist "%DefaultDesktopPath%\GAUTOCHARGER" (
     echo GAUTOCHARGER folder found on default Desktop.
-    start "" /min "python.exe" "%DefaultDesktopPath%\GAUTOCHARGER\GAutoChargerOAuth2.py" %*
+    start "" /min "python.exe" "%DefaultDesktopPath%\GAUTOCHARGER\GAutoChargerHybrid.py" %*
     exit /b
 ) else (
     echo GAUTOCHARGER folder not found on default Desktop.
@@ -45,7 +45,7 @@ echo Checking OneDrive Desktop: %DesktopPath%\GAUTOCHARGER
 
 if exist "%DesktopPath%\GAUTOCHARGER" (
     echo GAUTOCHARGER folder found on OneDrive Desktop.
-    start "" /min "python.exe" "%DesktopPath%\GAUTOCHARGER\GAutoChargerOAuth2.py" %*
+    start "" /min "python.exe" "%DesktopPath%\GAUTOCHARGER\GAutoChargerHybrid.py" %*
     exit /b
 ) else (
     echo GAUTOCHARGER folder not found on OneDrive Desktop.
