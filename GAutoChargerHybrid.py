@@ -53,16 +53,17 @@ def setup_logging():
 
     logger.setLevel(logging.DEBUG)
 
-    # File handler for detailed logs
+    # File handler for detailed logs with timestamps
     file_handler = TimedRotatingFileHandler(log_file_path, when="midnight", interval=1, backupCount=7)
     file_handler.suffix = "%Y%m%d"
     file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
     file_handler.setFormatter(file_formatter)
     logger.addHandler(file_handler)
 
-    # Console handler for high-level info
+    # Console handler for high-level info without timestamps
     console_handler = logging.StreamHandler()
-    console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    # ### FIX: Changed console formatter to remove the timestamp for a cleaner output.
+    console_formatter = logging.Formatter('%(levelname)s: %(message)s')
     console_handler.setFormatter(console_formatter)
     console_handler.setLevel(logging.INFO)
     logger.addHandler(console_handler)
@@ -165,8 +166,11 @@ def ping_host(host):
     param = '-n' if platform.system().lower() == 'windows' else '-c'
     command = ['ping', param, '1', host]
     try:
-        return subprocess.run(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
-    except (subprocess.SubprocessError, FileNotFoundError):
+        # Pinging with a timeout of 1 second (1000 ms for windows)
+        timeout_param = '-w' if platform.system().lower() == 'windows' else '-W'
+        command.extend([timeout_param, '1'])
+        return subprocess.run(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=2).returncode == 0
+    except (subprocess.SubprocessError, FileNotFoundError, subprocess.TimeoutExpired):
         return False
 
 async def control_tapo_plug(action, tapo_creds):
@@ -174,14 +178,12 @@ async def control_tapo_plug(action, tapo_creds):
     if not ApiClient or not tapo_creds:
         return False
 
-    # ### FIX: Add a ping check before attempting to connect to the Tapo API.
     if not ping_host(tapo_creds["ip_address"]):
         logger.warning(f"Tapo plug at {tapo_creds['ip_address']} is not reachable (ping failed).")
         return False
 
     try:
         client = ApiClient(tapo_creds["username"], tapo_creds["password"])
-        # ### FIX: Added a timeout to the p100 method to avoid long waits.
         device = await asyncio.wait_for(client.p100(tapo_creds["ip_address"]), timeout=5.0)
         
         if action == "on":
@@ -295,26 +297,29 @@ async def check_battery_and_control_plug(config, tapo_creds, state):
             logger.info(f"Battery is LOW ({percent}%). Triggering ON action.")
             if await control_plug_hybrid("on", tapo_creds):
                 state['last_action'] = "on"
-                action_taken = True
+                save_state(state) # Save state immediately after successful action
 
         elif percent >= config['battery_level_OFF'] and state['last_action'] != "off":
             logger.info(f"Battery is GOOD ({percent}%). Triggering OFF action.")
             if await control_plug_hybrid("off", tapo_creds):
                 state['last_action'] = "off"
-                action_taken = True
+                save_state(state) # Save state immediately after successful action
         
         else:
             logger.debug("No action required based on battery level and last known state.")
             # ### FIX: Update state if physical state differs from recorded state.
-            if plugged and state['last_action'] != "on":
+            state_changed = False
+            if plugged and state.get('last_action') != "on":
                 logger.info("State correction: Plug is ON but last action was not. Updating state.")
                 state['last_action'] = "on"
-            elif not plugged and state['last_action'] != "off":
+                state_changed = True
+            elif not plugged and state.get('last_action') != "off":
                 logger.info("State correction: Plug is OFF but last action was not. Updating state.")
                 state['last_action'] = "off"
-
-        if action_taken:
-            save_state(state)
+                state_changed = True
+            
+            if state_changed:
+                save_state(state)
 
     except Exception as e:
         logger.error(f"Error in check_battery_and_control_plug: {e}", exc_info=True)
@@ -352,4 +357,3 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         logger.info("Script interrupted by user (Ctrl+C). Shutting down.")
-
