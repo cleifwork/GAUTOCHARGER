@@ -1,6 +1,3 @@
-> [!IMPORTANT]
-> **DON'T USE JUST YET ONGOING CONSTRUCTION !!!**
-
 # GAUTOCHARGER-V4: Laptop AutoCharging Solution
 > [!NOTE] 
 > _For Local Network & VPN Use (Hybrid Version)_
@@ -15,8 +12,6 @@
 - **Works with VPN:** Unlike V2 this version works even if you are connected to VPN.
 
 ## Requirements (OAuth2)
-- **Python 3.11+:** Required to run the script.
-- **Python Libraries:** (```psutil```)
 - **IFTTT Account:** To receive email triggers and automate power control.
 - **Tapo Account:** With IFTTT integration, required to manage your Tapo Smart Plugs.
 - **Tapo Smart Plug:** Compatible models include P100, P105, etc.
@@ -33,26 +28,16 @@
 
 ## Environment Variables
 > [!NOTE]
-> **FOR SMTP:** To run this project, you need to generate and add your [google app password](https://myaccount.google.com/apppasswords) in the `g_creds.config` file
+> **FOR LOCAL:** To run this project, you need to add your tapo credentials and static IP in this file `tapo_creds.config`.
 
 > [!NOTE]
-> **FOR OAuth2:** To run this project, you need to generate `credentials.json` from your [Google Cloud Console](https://console.cloud.google.com/)
+> **FOR OAUTH2:** To run this project, you need to generate `credentials.json` from your [Google Cloud Console](https://console.cloud.google.com/)
 
 ## Installation
 ### 1. SHOULD HAVE A WINDOWS LAPTOP
 > [!NOTE] 
 > Tested using Windows 10 and Windows 11
-
-- [Install python](https://www.python.org/downloads/) (recommended version: _**python-3.11.4**_)
-> [!NOTE] 
-> Always check "Use admin privilege..." and "Add python.exe to PATH" during installation to avoid errors
-
-**Install the following libraries via CMD**
-```
-pip install tapo psutil
-```
-
-- Download **[GAUTOCHARGER-V4](https://github.com/cleifwork/GAUTOCHARGER/tree/GAUTOCHARGER-V3)**
+- Download **[GAUTOCHARGER-V4](https://github.com/cleifwork/GAUTOCHARGER/tree/GAUTOCHARGER-V4)**
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
@@ -72,13 +57,13 @@ pip install tapo psutil
 	- [PCBatteryGOOD](https://ift.tt/DkObnye)
 
 > [!IMPORTANT]
-> **FOR LOCAL:** Add your **credentials.json** file in the GAUTOCHARGER root folder.
+> **FOR LOCAL:** Add your **tapo_creds.json** file in the GAUTOCHARGER root folder.
 
 > [!IMPORTANT]
 > **FOR OATH2:** Add your **credentials.json** file in the GAUTOCHARGER root folder.
 
 ## Configuration
-- **g_creds.config:** Stores the google app password for sending email.
+- **tapo_creds.config:** Stores your tapo credentials.
 - **credentials.json** Generates token serves as credentials for sending email.
 - **Battery Control Logic:** The script monitors battery levels every 20 seconds and performs charging control every 1 minute. It turns on the smart plug when the battery falls below 20% and turns it off when the battery reaches 90%. These thresholds can be adjusted in the script.
 
@@ -102,12 +87,10 @@ pip install tapo psutil
 - Add future improvements here...
 
 ## Running Tests
-- **FOR LOCAL:** Launch ```run_g2chargesmtp.bat``` inside GAUTOCHARGER folder
-- **FOR OAuth2:** Launch ```run_g2chargeoauth.bat``` inside GAUTOCHARGER folder
-
+- Launch ```launchpad.bat``` inside GAUTOCHARGER folder
 
 ## Optimizations
-- PUT OPTIMIZATIONS HERE...
+- Made the app portable, no python libs needed, run anywhere
 
 ## Screenshots
 ![App Screenshot](https://drive.google.com/uc?export=view&id=1Vro6VWORnAFdjA1cgl-9VerqrLVbPYu7)
@@ -116,6 +99,6 @@ pip install tapo psutil
 #### Join our [FB Group](https://www.facebook.com/groups/1776872022780742) Or subscribe to our [YouTube](https://www.youtube.com/channel/UC9O3ezuyjS7C6V7-ZAHCQrA) Channel
 
 ## Tech Stack
-- **Client:** Python Script
-- **Server:** IFTTT - Tapo Integration
+- **Client:** Python Script, psutil
+- **Server:** IFTTT - Tapo Integration, Unofficial Tapo API, Google Auth 2.0
 
