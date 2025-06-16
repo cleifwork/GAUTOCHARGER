@@ -1,9 +1,10 @@
 import os
+import json
+import utils
+import base64
 import psutil
 import logging
 import asyncio
-import base64
-import json
 import platform
 import subprocess
 from logging.handlers import TimedRotatingFileHandler
@@ -26,14 +27,15 @@ except ImportError:
     print("Warning: Google API libraries not found. Remote (IFTTT) control will not be available. Please install with pip.")
     Credentials, InstalledAppFlow, Request, build = None, None, None, None
 
-# --- Configuration and Constants ---
-LOGS_DIR = "logs"
-LOCK_FILE = "autocharge_script.lock"
-STATE_FILE = "autocharge_state.json"
-CONFIG_FILE = "battery_level.config"
-TAPO_CREDS_FILE = "tapo_creds.config"
-GMAIL_TOKEN_PATH = "token.json"
-GMAIL_CREDS_PATH = "credentials.json"
+# --- Configuration and Constants from utils.py ---
+# All file paths are now sourced from the 'utils.py' file.
+LOGS_DIR = os.path.join(utils.exe_dir, "logs")
+LOCK_FILE = os.path.join(utils.exe_dir, "autocharge_script.lock") # This path was not in utils, so we construct it
+STATE_FILE = utils.FILE_PATHS["autocharge_state"]
+CONFIG_FILE = utils.FILE_PATHS["battery_level"]
+TAPO_CREDS_FILE = utils.FILE_PATHS["tapo_creds"]
+GMAIL_TOKEN_PATH = utils.FILE_PATHS["tokens"]
+GMAIL_CREDS_PATH = utils.FILE_PATHS["creds"]
 GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
 
@@ -75,14 +77,29 @@ logger = setup_logging()
 # --- Lock File and State Management ---
 
 def create_lock_file():
-    """Creates a lock file to prevent multiple script instances. Returns False if lock exists."""
+    """Checks for lock file and prompts for deletion if it exists."""
     if os.path.exists(LOCK_FILE):
-        logger.warning("Lock file exists. Another instance of the script may be running. Exiting.")
+        print("\nLock file 'autocharge_script.lock' already exists.")
+        response = input("Do you want to delete it and proceed? (Y/n): ").strip().lower()
+        if response == 'y' or response == 'yes':
+            try:
+                os.remove(LOCK_FILE)
+                logger.info("Existing lock file deleted by user.")
+            except Exception as e:
+                logger.error(f"Failed to delete lock file: {e}")
+                return False
+        else:
+            logger.warning("User chose not to delete the lock file. Exiting.")
+            return False
+
+    try:
+        with open(LOCK_FILE, "w") as f:
+            f.write(str(os.getpid()))
+        logger.info("Lock file created.")
+        return True
+    except Exception as e:
+        logger.error(f"Failed to create lock file: {e}")
         return False
-    with open(LOCK_FILE, "w") as f:
-        f.write(str(os.getpid()))
-    logger.info("Lock file created.")
-    return True
 
 def remove_lock_file():
     """Removes the lock file on clean exit."""
@@ -289,7 +306,7 @@ async def check_battery_and_control_plug(config, tapo_creds, state):
 
         percent = battery.percent
         plugged = battery.power_plugged
-        logger.info(f"Current Status: Battery={percent}%, Plugged In={plugged}, Last Action='{state.get('last_action')}'")
+        logger.info(f"Battery={percent}%, Plugged={plugged}, LastAction='{state.get('last_action')}'")
 
         action_taken = False
         # ### FIX: Logic now checks `state['last_action']` to prevent redundant commands.
