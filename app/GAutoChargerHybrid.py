@@ -28,7 +28,6 @@ except ImportError:
     Credentials, InstalledAppFlow, Request, build = None, None, None, None
 
 # --- Configuration and Constants from utils.py ---
-# All file paths are now sourced from the 'utils.py' file.
 LOGS_DIR = os.path.join(utils.exe_dir, "logs")
 LOCK_FILE = os.path.join(utils.exe_dir, "autocharge_script.lock") # This path was not in utils, so we construct it
 STATE_FILE = utils.FILE_PATHS["autocharge_state"]
