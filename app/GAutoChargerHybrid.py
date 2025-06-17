@@ -305,7 +305,8 @@ async def check_battery_and_control_plug(config, tapo_creds, state):
 
         percent = battery.percent
         plugged = battery.power_plugged
-        logger.info(f"Battery={percent}%, Plugged={plugged}, LastAction='{state.get('last_action')}'")
+        plugged_str = "Yes" if plugged else "No"
+        logger.info(f"Battery:{percent}%, Plugged:{plugged_str}, LastAction:'{state.get('last_action')}'")
 
         action_taken = False
         # ### FIX: Logic now checks `state['last_action']` to prevent redundant commands.
