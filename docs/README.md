@@ -76,7 +76,7 @@
 3. **Logging:** Logs battery levels
 
 #### FOR OATH2
-1. **Battery Monitoring:** The script uses the psutil library to monitor the laptop's battery percentage and charging status.
+1. **Battery Monitoring:** The script uses the psutil library to monitor laptop's battery and charging status.
 2. **OAuth2.0 credentials.json:** Allows the python script to send a more secure email to IFTTT
 3. **IFTTT-Tapo Integration:** Triggers the Tapo Smartplug (ON & OFF)
 2. **Smart Plug Control:** Based on the battery level thresholds, the python script sends email to IFTTT to either turn ON or OFF the Tapo Smart Plug using their integration .
