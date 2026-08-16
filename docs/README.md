@@ -1,8 +1,8 @@
-# GAUTOCHARGER-V4: Laptop AutoCharging Solution
+# GAUTOCHARGER-V5: Laptop AutoCharging Solution
 > [!NOTE] 
 > _For local-network control with a Home Assistant email fallback._
 
-**GAutoCharger-V4** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
+**GAutoCharger-V5** is a battery management automation solution designed for laptops running Windows OS that function as servers and remain connected to a power source 24/7. This tool intelligently controls the charging process by managing a Tapo Smart Plug (e.g., P100) via Wi-Fi. It ensures that the battery is charged only when necessary, extending battery life and improving overall health by avoiding constant charging cycles.
 
 ## Features
 - **Automated Charging Control:** Automatically turns on the smart plug when the battery level is low and turns it off when the battery is full, based on configurable thresholds.
@@ -20,8 +20,8 @@
 - **Unofficial Tapo API: (for usage reference)** To work via local network
 
 ## Demo
-- [GAutoCharger-V4 App Demo](https://www.youtube.com/watch?v=QEfLKXhg03o)
-- [GAutoCharger-V4 Installation & Configuration](https://www.youtube.com/watch?v=zHy7FS_HU7o)
+- [GAutoCharger-V4 App Demo (legacy)](https://www.youtube.com/watch?v=QEfLKXhg03o)
+- [GAutoCharger-V4 Installation & Configuration (legacy)](https://www.youtube.com/watch?v=zHy7FS_HU7o)
 
 ## Author
 - [@cleifwork](https://www.github.com/cleifwork)
@@ -37,7 +37,7 @@
 ### 1. SHOULD HAVE A WINDOWS LAPTOP
 > [!NOTE] 
 > Tested using Windows 10 and Windows 11
-- Download **[GAUTOCHARGER-V4](https://github.com/cleifwork/GAUTOCHARGER/tree/GAUTOCHARGER-V4)**
+- Download **[GAUTOCHARGER-V5](https://github.com/cleifwork/GAUTOCHARGER/tree/GAUTOCHARGER-V5)**
 - Click Code > Download Zip
 - Extract main folder to your Desktop
 - Rename main folder to **'GAUTOCHARGER'**
