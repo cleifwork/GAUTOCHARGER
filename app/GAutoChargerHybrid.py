@@ -24,7 +24,7 @@ try:
     from google.auth.transport.requests import Request
     from googleapiclient.discovery import build
 except ImportError:
-    print("Warning: Google API libraries not found. Remote (IFTTT) control will not be available. Please install with pip.")
+    print("Warning: Google API libraries not found. Home Assistant email fallback will not be available.")
     Credentials, InstalledAppFlow, Request, build = None, None, None, None
 
 # --- Configuration and Constants from utils.py ---
@@ -33,6 +33,7 @@ LOCK_FILE = os.path.join(utils.exe_dir, "autocharge_script.lock") # This path wa
 STATE_FILE = utils.FILE_PATHS["autocharge_state"]
 CONFIG_FILE = utils.FILE_PATHS["battery_level"]
 TAPO_CREDS_FILE = utils.FILE_PATHS["tapo_creds"]
+HOME_ASSISTANT_EMAIL_CONFIG_FILE = utils.FILE_PATHS["home_assistant_email"]
 GMAIL_TOKEN_PATH = utils.FILE_PATHS["tokens"]
 GMAIL_CREDS_PATH = utils.FILE_PATHS["creds"]
 GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
@@ -175,6 +176,45 @@ def read_tapo_credentials(file_path):
         logger.error(f"Error reading Tapo credentials from '{file_path}': {e}.")
         return None
 
+def read_home_assistant_email_config(file_path):
+    """Reads the recipient and Home Assistant email command subjects."""
+    required_keys = {"to_email", "on_subject", "off_subject"}
+    config = {}
+
+    if not os.path.exists(file_path):
+        logger.warning(
+            f"Home Assistant email config '{file_path}' not found. "
+            "Remote email fallback is disabled."
+        )
+        return None
+
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            for line in file:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    key, value = map(str.strip, line.split('=', 1))
+                    config[key] = value
+    except OSError as e:
+        logger.error(f"Unable to read Home Assistant email config '{file_path}': {e}")
+        return None
+
+    missing_keys = sorted(key for key in required_keys if not config.get(key))
+    if missing_keys:
+        logger.error(
+            "Home Assistant email fallback is disabled; missing config value(s): "
+            f"{', '.join(missing_keys)}."
+        )
+        return None
+
+    # Prevent a malformed config value from injecting extra email headers.
+    for key in ("to_email", "on_subject", "off_subject"):
+        if '\\r' in config[key] or '\\n' in config[key]:
+            logger.error(f"Home Assistant email fallback is disabled; '{key}' contains a newline.")
+            return None
+
+    return config
+
 # --- Health Checks and Device Control ---
 
 def ping_host(host):
@@ -217,66 +257,79 @@ async def control_tapo_plug(action, tapo_creds):
         return False
 
 def get_gmail_service():
-    """Authenticates and returns a Gmail API service instance."""
+    """Authenticates and returns a Gmail API service instance for sending email."""
     if not all([Credentials, InstalledAppFlow, Request, build]):
         return None
+
     creds = None
     if os.path.exists(GMAIL_TOKEN_PATH):
         try:
             creds = Credentials.from_authorized_user_file(GMAIL_TOKEN_PATH, GMAIL_SCOPES)
         except Exception as e:
-            logger.error(f"Corrupted token file '{GMAIL_TOKEN_PATH}': {e}. Deleting and re-authenticating.")
-            os.remove(GMAIL_TOKEN_PATH) # Remove corrupted token
+            logger.error(f"Unable to read Gmail OAuth token '{GMAIL_TOKEN_PATH}': {e}")
+            return None
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             try:
-                logger.info("Refreshing expired Gmail API token...")
+                logger.info("Refreshing Gmail OAuth token...")
                 creds.refresh(Request())
             except Exception as e:
-                logger.error(f"Gmail API token refresh failed: {e}. Will attempt full re-authentication.")
-                creds = None # Force re-auth
-        else: # No creds or no refresh token
+                logger.error(f"Gmail OAuth token refresh failed: {e}")
+                return None
+        else:
             if not os.path.exists(GMAIL_CREDS_PATH):
-                logger.error(f"'{GMAIL_CREDS_PATH}' not found. Cannot authenticate for remote control.")
+                logger.error(f"'{GMAIL_CREDS_PATH}' not found. Cannot authenticate Home Assistant email fallback.")
                 return None
             try:
-                logger.info("Performing full Gmail API OAuth2 authentication...")
+                logger.info("Opening Gmail OAuth authorization for Home Assistant email fallback...")
                 flow = InstalledAppFlow.from_client_secrets_file(GMAIL_CREDS_PATH, GMAIL_SCOPES)
                 creds = flow.run_local_server(port=0)
             except Exception as e:
-                logger.error(f"Error during Gmail API OAuth2 flow: {e}.")
+                logger.error(f"Gmail OAuth authorization failed: {e}")
                 return None
-        # Save the new/refreshed token
-        if creds:
-            with open(GMAIL_TOKEN_PATH, "w") as token:
+
+        try:
+            with open(GMAIL_TOKEN_PATH, "w", encoding="utf-8") as token:
                 token.write(creds.to_json())
+        except OSError as e:
+            logger.error(f"Unable to save Gmail OAuth token: {e}")
+            return None
+
     try:
         return build("gmail", "v1", credentials=creds)
     except Exception as e:
-        logger.error(f"Error building Gmail service: {e}")
+        logger.error(f"Unable to build Gmail API service: {e}")
         return None
 
-def send_ifttt_email(subject, to_email="trigger@applet.ifttt.com"):
-    """Sends an email using Gmail API to trigger IFTTT."""
-    service = get_gmail_service()
-    if not service:
-        logger.error("Cannot send IFTTT email: Gmail service not available.")
-        return False
-    try:
-        message = MIMEText("")
-        message["to"] = to_email
-        message["subject"] = subject
-        raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
-        service.users().messages().send(userId="me", body={"raw": raw_message}).execute()
-        logger.info(f"Successfully sent IFTTT email with subject: '{subject}'")
-        return True
-    except Exception as e:
-        logger.error(f"Failed to send IFTTT email: {e}")
+def send_home_assistant_email(action, email_config):
+    """Sends the configured Home Assistant ON/OFF command through the Gmail API."""
+    if not email_config:
+        logger.error("Cannot send Home Assistant command: email fallback is not configured.")
         return False
 
-async def control_plug_hybrid(action, tapo_creds):
-    """Attempts local control, then falls back to remote IFTTT control."""
+    subject = email_config["on_subject"] if action == "on" else email_config["off_subject"]
+    service = get_gmail_service()
+    if not service:
+        logger.error("Cannot send Home Assistant command: Gmail OAuth service is not available.")
+        return False
+
+    try:
+        message = MIMEText("")
+        message["to"] = email_config["to_email"]
+        message["subject"] = subject
+
+        raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
+        service.users().messages().send(userId="me", body={"raw": raw_message}).execute()
+
+        logger.info(f"Home Assistant {action.upper()} command email sent successfully.")
+        return True
+    except Exception as e:
+        logger.error(f"Failed to send Home Assistant {action.upper()} command email: {e}")
+        return False
+
+async def control_plug_hybrid(action, tapo_creds, email_config):
+    """Attempts local control, then falls back to a Home Assistant email command."""
     logger.info(f"Attempting to turn plug '{action.upper()}'...")
     
     local_success = await control_tapo_plug(action, tapo_creds)
@@ -284,18 +337,17 @@ async def control_plug_hybrid(action, tapo_creds):
         logger.info("Local control was successful.")
         return True
 
-    logger.warning("Local control failed. Falling back to remote (IFTTT) control.")
-    subject = "#PCBatteryLOW" if action == "on" else "#PCBatteryGOOD"
-    remote_success = send_ifttt_email(subject)
+    logger.warning("Local control failed. Falling back to Home Assistant email control.")
+    remote_success = await asyncio.to_thread(send_home_assistant_email, action, email_config)
     if remote_success:
-        logger.info("Remote control attempt via IFTTT was successful.")
+        logger.info("Remote control attempt via Home Assistant email was successful.")
     else:
-        logger.error("Remote control attempt via IFTTT failed.")
+        logger.error("Remote control attempt via Home Assistant email failed.")
     return remote_success
 
 # --- Main Application Logic ---
 
-async def check_battery_and_control_plug(config, tapo_creds, state):
+async def check_battery_and_control_plug(config, tapo_creds, email_config, state):
     """Main logic to check battery and decide on plug action."""
     try:
         battery = psutil.sensors_battery()
@@ -312,13 +364,13 @@ async def check_battery_and_control_plug(config, tapo_creds, state):
         # ### FIX: Logic now checks `state['last_action']` to prevent redundant commands.
         if percent <= config['battery_level_ON'] and state['last_action'] != "on":
             logger.info(f"Battery is LOW ({percent}%). Triggering ON action.")
-            if await control_plug_hybrid("on", tapo_creds):
+            if await control_plug_hybrid("on", tapo_creds, email_config):
                 state['last_action'] = "on"
                 save_state(state) # Save state immediately after successful action
 
         elif percent >= config['battery_level_OFF'] and state['last_action'] != "off":
             logger.info(f"Battery is GOOD ({percent}%). Triggering OFF action.")
-            if await control_plug_hybrid("off", tapo_creds):
+            if await control_plug_hybrid("off", tapo_creds, email_config):
                 state['last_action'] = "off"
                 save_state(state) # Save state immediately after successful action
         
@@ -349,6 +401,7 @@ async def main():
     try:
         config = read_config(CONFIG_FILE)
         tapo_creds = read_tapo_credentials(TAPO_CREDS_FILE)
+        email_config = read_home_assistant_email_config(HOME_ASSISTANT_EMAIL_CONFIG_FILE)
         state = load_state()
 
         logger.info("="*50)
@@ -358,7 +411,7 @@ async def main():
         logger.info("="*50)
         
         while True:
-            await check_battery_and_control_plug(config, tapo_creds, state)
+            await check_battery_and_control_plug(config, tapo_creds, email_config, state)
             await asyncio.sleep(config['plug_control_frequency'])
 
     except asyncio.CancelledError:

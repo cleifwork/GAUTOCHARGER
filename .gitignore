@@ -1,1 +1,8 @@
 app/tapo_creds.config
+app/home_assistant_email.config
+app/credentials.json
+app/token.json
+app/autocharge_state.json
+app/autocharge_script.lock
+app/logs/
+app/__pycache__/

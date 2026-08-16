@@ -11,6 +11,7 @@ FILE_PATHS = {
     "creds": os.path.join(exe_dir, 'credentials.json'),
     "autocharge_state": os.path.join(exe_dir, 'autocharge_state.json'),
     "battery_level": os.path.join(exe_dir, 'battery_level.config'),
-    "tapo_creds": os.path.join(exe_dir, 'tapo_creds.config')
+    "tapo_creds": os.path.join(exe_dir, 'tapo_creds.config'),
+    "home_assistant_email": os.path.join(exe_dir, 'home_assistant_email.config'),
 }
 
