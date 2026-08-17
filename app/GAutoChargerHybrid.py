@@ -119,6 +119,7 @@ def load_state():
         "last_action": "unknown",
         "active_action": None,
         "last_local_success_action": "unknown",
+        "last_confirmed_action": "unknown",
         "email_fallback": {
             "action": None,
             "attempt_count": 0,
@@ -401,6 +402,15 @@ def email_retry_wait_minutes(email_config, attempt_count):
         return retry_delays[attempt_count - 1]
     return email_config["repeat_retry_minutes"]
 
+def battery_status_confirms_action(action, plugged):
+    """Returns whether Windows' charging status confirms the requested action.
+
+    This is an indirect confirmation: it verifies that the laptop is receiving
+    power (or not), rather than querying the Tapo plug itself. It is useful
+    when a VPN prevents direct local Tapo access.
+    """
+    return plugged if action == "on" else not plugged
+
 async def send_home_assistant_email_if_due(action, email_config, state):
     """Sends a rate-limited fallback email and persists every send attempt."""
     if not email_config:
@@ -475,11 +485,31 @@ async def check_battery_and_control_plug(config, tapo_creds, email_config, state
         if state.get("active_action") != action:
             logger.info(f"Starting a new {action.upper()} control cycle.")
             state["active_action"] = action
+            state["last_local_success_action"] = "unknown"
             reset_email_retry_state(state, action)
             save_state(state)
 
+        # Home Assistant email is one-way, but the laptop's charging status is
+        # a practical confirmation for this charger setup. Once the observed
+        # power state matches the requested action, stop local retries and
+        # clear the email retry schedule. If it does not match, the existing
+        # slow fallback schedule remains in effect.
+        if battery_status_confirms_action(action, plugged):
+            if state.get("last_confirmed_action") != action:
+                logger.info(
+                    f"State correction: laptop charging status confirms plug is {action.upper()}."
+                )
+                state["last_action"] = action
+                state["last_confirmed_action"] = action
+                reset_email_retry_state(state, action)
+                save_state(state)
+            else:
+                logger.debug(f"Laptop charging status already confirms {action.upper()}.")
+            return
+
         # A sent email does not confirm the Tapo state. Keep trying local
-        # control every loop until the local route succeeds for this action.
+        # control every loop until it succeeds or laptop charging status
+        # confirms the requested action.
         if state.get("last_local_success_action") == action:
             logger.debug(f"Local {action.upper()} control already succeeded for this cycle.")
             return
@@ -490,6 +520,7 @@ async def check_battery_and_control_plug(config, tapo_creds, email_config, state
             logger.info("Local control was successful.")
             state["last_action"] = action
             state["last_local_success_action"] = action
+            state["last_confirmed_action"] = action
             reset_email_retry_state(state, action)
             save_state(state)
             return

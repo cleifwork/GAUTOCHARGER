@@ -59,7 +59,7 @@
 ## Configuration
 - **tapo_creds.config:** Stores your tapo credentials.
 - **home_assistant_email.config:** Stores the Home Assistant command inbox, private ON/OFF email command subjects, and retry timing.
-- **Battery Control Logic:** The script checks at the configured interval, turns the plug on at the ON threshold, and turns it off at the OFF threshold. Local Tapo control retries every interval while fallback command emails follow a separate rate limit.
+- **Battery Control Logic:** The script checks at the configured interval, turns the plug on at the ON threshold, and turns it off at the OFF threshold. When local Tapo access is unavailable, Windows charging status confirms whether the requested state took effect. Until that confirmation arrives, local Tapo control retries every interval while fallback command emails follow a separate rate limit.
 
 ## How It Works?
 #### Local Tapo control
@@ -70,7 +70,7 @@
 #### Home Assistant email fallback
 1. If local Tapo control fails, the script sends the command through the Gmail API using the least-privilege `gmail.send` OAuth scope.
 2. It sends either the configured ON or OFF command subject to the Home Assistant command inbox.
-3. Home Assistant receives the email through IMAP and its matching automation controls the local Tapo plug. The app continues local retries but rate-limits email retries to prevent inbox spam.
+3. Home Assistant receives the email through IMAP and its matching automation controls the local Tapo plug. The app uses the laptop's charging status as indirect confirmation; until the status matches the requested ON/OFF state, it continues local retries and rate-limits email retries to prevent inbox spam.
 
 
 ## Future Improvements
