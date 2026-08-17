@@ -507,13 +507,9 @@ async def check_battery_and_control_plug(config, tapo_creds, email_config, state
                 logger.debug(f"Laptop charging status already confirms {action.upper()}.")
             return
 
-        # A sent email does not confirm the Tapo state. Keep trying local
-        # control every loop until it succeeds or laptop charging status
-        # confirms the requested action.
-        if state.get("last_local_success_action") == action:
-            logger.debug(f"Local {action.upper()} control already succeeded for this cycle.")
-            return
-
+        # A sent email does not confirm the Tapo state. When the observed
+        # charging status does not match the requested action, retry local
+        # control every loop and let the email fallback keep its slow schedule.
         logger.info(f"Attempting local {action.upper()} control.")
         local_success = await control_tapo_plug(action, tapo_creds)
         if local_success:
