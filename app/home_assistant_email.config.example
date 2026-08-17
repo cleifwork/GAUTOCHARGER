@@ -4,3 +4,8 @@
 to_email=your-home-assistant-command-inbox@example.com
 on_subject=GAUTO_ON_replace-with-your-random-secret
 off_subject=GAUTO_OFF_replace-with-your-random-secret
+
+# Email retries after the first fallback message: 10, 30, and 90 minutes after
+# the initial email, then once every 120 minutes while the same action is needed.
+retry_delays_minutes=10,20,60
+repeat_retry_minutes=120

@@ -7,6 +7,7 @@ import logging
 import asyncio
 import platform
 import subprocess
+import time
 from logging.handlers import TimedRotatingFileHandler
 from email.mime.text import MIMEText
 
@@ -37,6 +38,11 @@ HOME_ASSISTANT_EMAIL_CONFIG_FILE = utils.FILE_PATHS["home_assistant_email"]
 GMAIL_TOKEN_PATH = utils.FILE_PATHS["tokens"]
 GMAIL_CREDS_PATH = utils.FILE_PATHS["creds"]
 GMAIL_SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
+
+# After the initial fallback email, retry at 10, 30, and 90 minutes, then once
+# every two hours while the same action is still required.
+DEFAULT_EMAIL_RETRY_DELAYS_MINUTES = (10, 20, 60)
+DEFAULT_EMAIL_REPEAT_RETRY_MINUTES = 120
 
 
 # --- Logging Setup ---
@@ -109,13 +115,34 @@ def remove_lock_file():
 
 def load_state():
     """Loads the last known state from a JSON file."""
+    default_state = {
+        "last_action": "unknown",
+        "active_action": None,
+        "last_local_success_action": "unknown",
+        "email_fallback": {
+            "action": None,
+            "attempt_count": 0,
+            "last_attempt_at": None,
+        },
+    }
     if os.path.exists(STATE_FILE):
         try:
             with open(STATE_FILE, 'r') as f:
-                return json.load(f)
+                loaded_state = json.load(f)
+                if isinstance(loaded_state, dict):
+                    default_state.update(loaded_state)
+                    fallback_state = default_state.get("email_fallback")
+                    if not isinstance(fallback_state, dict):
+                        fallback_state = {}
+                    default_state["email_fallback"] = {
+                        "action": fallback_state.get("action"),
+                        "attempt_count": fallback_state.get("attempt_count", 0),
+                        "last_attempt_at": fallback_state.get("last_attempt_at"),
+                    }
+                    return default_state
         except (json.JSONDecodeError, IOError) as e:
             logger.error(f"Error reading state file {STATE_FILE}: {e}. Starting with a fresh state.")
-    return {"last_action": "unknown"} # Default state
+    return default_state
 
 def save_state(state):
     """Saves the current state to a JSON file."""
@@ -212,6 +239,37 @@ def read_home_assistant_email_config(file_path):
         if '\\r' in config[key] or '\\n' in config[key]:
             logger.error(f"Home Assistant email fallback is disabled; '{key}' contains a newline.")
             return None
+
+    retry_delays_value = config.get("retry_delays_minutes", "10,20,60")
+    try:
+        retry_delays = tuple(
+            int(value.strip())
+            for value in retry_delays_value.split(",")
+            if value.strip()
+        )
+        if not retry_delays or any(delay <= 0 for delay in retry_delays):
+            raise ValueError
+        config["retry_delays_minutes"] = retry_delays
+    except ValueError:
+        logger.error(
+            "Invalid retry_delays_minutes. Using default email retry delays: "
+            f"{DEFAULT_EMAIL_RETRY_DELAYS_MINUTES}."
+        )
+        config["retry_delays_minutes"] = DEFAULT_EMAIL_RETRY_DELAYS_MINUTES
+
+    try:
+        repeat_retry_minutes = int(
+            config.get("repeat_retry_minutes", DEFAULT_EMAIL_REPEAT_RETRY_MINUTES)
+        )
+        if repeat_retry_minutes <= 0:
+            raise ValueError
+        config["repeat_retry_minutes"] = repeat_retry_minutes
+    except ValueError:
+        logger.error(
+            "Invalid repeat_retry_minutes. Using default repeat retry delay: "
+            f"{DEFAULT_EMAIL_REPEAT_RETRY_MINUTES}."
+        )
+        config["repeat_retry_minutes"] = DEFAULT_EMAIL_REPEAT_RETRY_MINUTES
 
     return config
 
@@ -328,21 +386,65 @@ def send_home_assistant_email(action, email_config):
         logger.error(f"Failed to send Home Assistant {action.upper()} command email: {e}")
         return False
 
-async def control_plug_hybrid(action, tapo_creds, email_config):
-    """Attempts local control, then falls back to a Home Assistant email command."""
-    logger.info(f"Attempting to turn plug '{action.upper()}'...")
-    
-    local_success = await control_tapo_plug(action, tapo_creds)
-    if local_success:
-        logger.info("Local control was successful.")
-        return True
+def reset_email_retry_state(state, action=None):
+    """Clears fallback-email attempts for a new or locally completed action."""
+    state["email_fallback"] = {
+        "action": action,
+        "attempt_count": 0,
+        "last_attempt_at": None,
+    }
 
-    logger.warning("Local control failed. Falling back to Home Assistant email control.")
+def email_retry_wait_minutes(email_config, attempt_count):
+    """Returns the delay after the given number of email attempts."""
+    retry_delays = email_config["retry_delays_minutes"]
+    if attempt_count <= len(retry_delays):
+        return retry_delays[attempt_count - 1]
+    return email_config["repeat_retry_minutes"]
+
+async def send_home_assistant_email_if_due(action, email_config, state):
+    """Sends a rate-limited fallback email and persists every send attempt."""
+    if not email_config:
+        logger.error("Home Assistant email fallback is not configured.")
+        return False
+
+    fallback_state = state["email_fallback"]
+    if fallback_state.get("action") != action:
+        reset_email_retry_state(state, action)
+        fallback_state = state["email_fallback"]
+
+    attempt_count = fallback_state.get("attempt_count", 0)
+    last_attempt_at = fallback_state.get("last_attempt_at")
+    now = time.time()
+
+    if attempt_count and last_attempt_at is not None:
+        wait_minutes = email_retry_wait_minutes(email_config, attempt_count)
+        wait_seconds = wait_minutes * 60
+        elapsed_seconds = now - last_attempt_at
+        if elapsed_seconds < wait_seconds:
+            remaining_minutes = max(1, round((wait_seconds - elapsed_seconds) / 60))
+            logger.info(
+                f"Home Assistant {action.upper()} email fallback is rate-limited. "
+                f"Next retry in about {remaining_minutes} minute(s)."
+            )
+            return False
+
+    # Record failed Gmail API calls too, so a send failure cannot cause an API
+    # call on every battery loop.
+    fallback_state["attempt_count"] = attempt_count + 1
+    fallback_state["last_attempt_at"] = now
+    save_state(state)
+
+    logger.warning(
+        f"Local control failed. Sending Home Assistant {action.upper()} email "
+        f"attempt #{fallback_state['attempt_count']}."
+    )
     remote_success = await asyncio.to_thread(send_home_assistant_email, action, email_config)
     if remote_success:
-        logger.info("Remote control attempt via Home Assistant email was successful.")
+        logger.info("Home Assistant fallback email was accepted by Gmail.")
+        state["last_action"] = action
+        save_state(state)
     else:
-        logger.error("Remote control attempt via Home Assistant email failed.")
+        logger.error("Home Assistant fallback email could not be sent; its retry is also rate-limited.")
     return remote_success
 
 # --- Main Application Logic ---
@@ -360,35 +462,40 @@ async def check_battery_and_control_plug(config, tapo_creds, email_config, state
         plugged_str = "Yes" if plugged else "No"
         logger.info(f"Battery:{percent}%, Plugged:{plugged_str}, LastAction:'{state.get('last_action')}'")
 
-        action_taken = False
-        # ### FIX: Logic now checks `state['last_action']` to prevent redundant commands.
-        if percent <= config['battery_level_ON'] and state['last_action'] != "on":
-            logger.info(f"Battery is LOW ({percent}%). Triggering ON action.")
-            if await control_plug_hybrid("on", tapo_creds, email_config):
-                state['last_action'] = "on"
-                save_state(state) # Save state immediately after successful action
-
-        elif percent >= config['battery_level_OFF'] and state['last_action'] != "off":
-            logger.info(f"Battery is GOOD ({percent}%). Triggering OFF action.")
-            if await control_plug_hybrid("off", tapo_creds, email_config):
-                state['last_action'] = "off"
-                save_state(state) # Save state immediately after successful action
-        
+        if percent <= config['battery_level_ON']:
+            action = "on"
+            logger.info(f"Battery is LOW ({percent}%). ON is required.")
+        elif percent >= config['battery_level_OFF']:
+            action = "off"
+            logger.info(f"Battery is GOOD ({percent}%). OFF is required.")
         else:
-            logger.debug("No action required based on battery level and last known state.")
-            # ### FIX: Update state if physical state differs from recorded state.
-            state_changed = False
-            if plugged and state.get('last_action') != "on":
-                logger.info("State correction: Plug is ON but last action was not. Updating state.")
-                state['last_action'] = "on"
-                state_changed = True
-            elif not plugged and state.get('last_action') != "off":
-                logger.info("State correction: Plug is OFF but last action was not. Updating state.")
-                state['last_action'] = "off"
-                state_changed = True
-            
-            if state_changed:
-                save_state(state)
+            logger.debug("Battery is between thresholds; no plug action is required.")
+            return
+
+        if state.get("active_action") != action:
+            logger.info(f"Starting a new {action.upper()} control cycle.")
+            state["active_action"] = action
+            reset_email_retry_state(state, action)
+            save_state(state)
+
+        # A sent email does not confirm the Tapo state. Keep trying local
+        # control every loop until the local route succeeds for this action.
+        if state.get("last_local_success_action") == action:
+            logger.debug(f"Local {action.upper()} control already succeeded for this cycle.")
+            return
+
+        logger.info(f"Attempting local {action.upper()} control.")
+        local_success = await control_tapo_plug(action, tapo_creds)
+        if local_success:
+            logger.info("Local control was successful.")
+            state["last_action"] = action
+            state["last_local_success_action"] = action
+            reset_email_retry_state(state, action)
+            save_state(state)
+            return
+
+        # Local calls retry every loop; fallback emails use their own schedule.
+        await send_home_assistant_email_if_due(action, email_config, state)
 
     except Exception as e:
         logger.error(f"Error in check_battery_and_control_plug: {e}", exc_info=True)

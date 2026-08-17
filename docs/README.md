@@ -9,7 +9,7 @@
 - **Battery Level Monitoring:** Logs battery levels and power status at regular intervals, providing full visibility into the device’s charging state.
 - **Daily Log Rotation:** Generates daily logs stored in the ```/logs/``` directory with automatic log rotation, ensuring minimal maintenance and easy tracking of battery status.
 - **Configurable Parameters:** Easy-to-set thresholds and other parameters in the ```battery_level.config``` file for quick configuration.
-- **VPN-safe fallback:** When local Tapo control is unavailable (for example, while a VPN blocks LAN traffic), the script sends a Gmail command email to Home Assistant.
+- **VPN-safe fallback:** When local Tapo control is unavailable (for example, while a VPN blocks LAN traffic), the script sends a rate-limited Gmail command email to Home Assistant.
 
 ## Requirements
 - **Home Assistant:** An always-on Home Assistant instance on the same home network as the Tapo plug, with the TP-Link Smart Home integration configured.
@@ -54,11 +54,12 @@
 3. Copy `app/home_assistant_email.config.example` to `app/home_assistant_email.config`.
 4. Set `to_email` to the inbox monitored by Home Assistant. The sender is the Gmail account authorized through `credentials.json` and `token.json`.
 5. Set `on_subject` and `off_subject` to exactly match the corresponding Home Assistant automation filters.
+6. By default, the first fallback email is sent immediately, then retried at 10, 30, and 90 minutes. It retries once every 120 minutes afterward while the same action is still required. Adjust `retry_delays_minutes` or `repeat_retry_minutes` only if needed.
 
 ## Configuration
 - **tapo_creds.config:** Stores your tapo credentials.
-- **home_assistant_email.config:** Stores the Home Assistant command inbox and private ON/OFF email command subjects.
-- **Battery Control Logic:** The script checks at the configured interval, turns the plug on at the ON threshold, and turns it off at the OFF threshold. It uses local Tapo control first, then sends the Home Assistant email command only if local control fails.
+- **home_assistant_email.config:** Stores the Home Assistant command inbox, private ON/OFF email command subjects, and retry timing.
+- **Battery Control Logic:** The script checks at the configured interval, turns the plug on at the ON threshold, and turns it off at the OFF threshold. Local Tapo control retries every interval while fallback command emails follow a separate rate limit.
 
 ## How It Works?
 #### Local Tapo control
@@ -69,7 +70,7 @@
 #### Home Assistant email fallback
 1. If local Tapo control fails, the script sends the command through the Gmail API using the least-privilege `gmail.send` OAuth scope.
 2. It sends either the configured ON or OFF command subject to the Home Assistant command inbox.
-3. Home Assistant receives the email through IMAP and its matching automation controls the local Tapo plug.
+3. Home Assistant receives the email through IMAP and its matching automation controls the local Tapo plug. The app continues local retries but rate-limits email retries to prevent inbox spam.
 
 
 ## Future Improvements
