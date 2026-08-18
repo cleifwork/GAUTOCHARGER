@@ -474,10 +474,10 @@ async def check_battery_and_control_plug(config, tapo_creds, email_config, state
 
         if percent <= config['battery_level_ON']:
             action = "on"
-            logger.info(f"Battery is LOW ({percent}%). ON is required.")
+            battery_message = f"Battery is LOW ({percent}%)."
         elif percent >= config['battery_level_OFF']:
             action = "off"
-            logger.info(f"Battery is GOOD ({percent}%). OFF is required.")
+            battery_message = f"Battery is GOOD ({percent}%)."
         else:
             logger.debug("Battery is between thresholds; no plug action is required.")
             return
@@ -495,6 +495,9 @@ async def check_battery_and_control_plug(config, tapo_creds, email_config, state
         # clear the email retry schedule. If it does not match, the existing
         # slow fallback schedule remains in effect.
         if battery_status_confirms_action(action, plugged):
+            logger.info(
+                f"{battery_message} Laptop power status already confirms {action.upper()}."
+            )
             if state.get("last_confirmed_action") != action:
                 logger.info(
                     f"State correction: laptop charging status confirms plug is {action.upper()}."
@@ -510,6 +513,11 @@ async def check_battery_and_control_plug(config, tapo_creds, email_config, state
         # A sent email does not confirm the Tapo state. When the observed
         # charging status does not match the requested action, retry local
         # control every loop and let the email fallback keep its slow schedule.
+        observed_state = "ON (laptop receiving power)" if plugged else "OFF (laptop not receiving power)"
+        logger.info(
+            f"{battery_message} Laptop power status indicates {observed_state}; "
+            f"{action.upper()} command is pending."
+        )
         logger.info(f"Attempting local {action.upper()} control.")
         local_success = await control_tapo_plug(action, tapo_creds)
         if local_success:
